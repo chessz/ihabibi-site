@@ -14,6 +14,9 @@ import {
   ChevronUp,
   ArrowRight,
   Check,
+  Clock,
+  Phone,
+  Users,
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -21,9 +24,9 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <CostUrgencySection />
       <FeatureSection />
       <HowItWorksSection />
+      <CostUrgencySection />
       <AudienceSection />
       <RoadmapSection />
       <PricingPreviewSection />
@@ -38,122 +41,140 @@ export default function HomePage() {
    ───────────────────────────────────────────── */
 function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
-      {/* Subtle radial glow */}
+    <section className="relative overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 grain-overlay">
+      {/* Radial glow */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse 60% 50% at 50% 40%, rgba(13,107,110,0.12), transparent 60%)',
+            'radial-gradient(ellipse 55% 40% at 45% 35%, rgba(13,107,110,0.10), transparent 55%), radial-gradient(ellipse 80% 50% at 60% 60%, rgba(2,132,199,0.04), transparent 60%)',
         }}
         aria-hidden="true"
       />
 
       <Container>
-        <div className="relative z-10 flex flex-col items-start gap-16 py-24 lg:flex-row lg:py-32">
-          {/* Left: text */}
-          <div className="flex-1 pt-0 lg:pt-12">
-            <p className="kicker-light mb-4">Household OS</p>
-            <h1 className="font-serif text-[3.5rem] leading-[1.08] font-medium tracking-[-0.015em] text-white sm:text-[4rem] lg:text-[4.5rem]">
-              What needs
-              <br />
-              you today?
-            </h1>
-            <p className="mt-6 max-w-lg text-lg leading-relaxed text-warm-300/90">
-              MOT, insurance, bin day, council deadlines, school dates — tracked and surfaced
-              before they become problems. One dashboard for everything your household asks of you.
+        <div className="relative z-10 flex flex-col gap-12 pt-20 pb-28 lg:flex-row lg:items-center lg:gap-20 lg:pt-28 lg:pb-36">
+          {/* Left: copy */}
+          <div className="flex-1 lg:max-w-[52%]">
+            <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-warm-300/80 backdrop-blur-sm">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand-400" />
+              Household OS
             </p>
-            <div className="mt-8 flex flex-wrap gap-4">
+            <h1 className="font-serif text-[3.25rem] leading-[1.06] font-medium tracking-[-0.015em] text-white sm:text-[4rem] lg:text-[4.75rem]">
+              Everything your
+              <br />
+              household needs
+              <br />
+              from you, in
+              <br />
+              one place.
+            </h1>
+            <p className="mt-6 max-w-lg text-[1.125rem] leading-relaxed text-warm-300/80">
+              MOTs, insurance, bin day, council deadlines, school dates, utility renewals —
+              surfaced before they become problems. No more missed renewals. No more late-night
+              worry.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
               <a href="#waitlist" className="btn-primary">
-                Join the waitlist
-                <ArrowRight size={18} className="ml-2" />
+                Get early access
+                <ArrowRight size={16} />
               </a>
               <a href="#features" className="btn-secondary-light">
                 See what it tracks
-                <ChevronDown size={18} className="ml-2" />
+                <ChevronDown size={16} />
               </a>
             </div>
+
+            {/* Trust micro-line */}
+            <p className="mt-6 text-xs text-warm-400/70">
+              Free during early access. No credit card. Built in the UK.
+            </p>
           </div>
 
           {/* Right: product preview */}
           <div className="flex-1">
-            <div className="relative mx-auto max-w-md lg:max-w-none">
-              {/* Product screenshot placeholder — dark dashboard panel */}
-              <div className="rounded-2xl border border-white/10 bg-slate-900/80 p-6 shadow-2xl shadow-black/40 backdrop-blur-sm">
-                {/* Fake dashboard header */}
-                <div className="mb-5 flex items-center gap-2.5">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-sky-500 to-indigo-600 text-xs font-bold text-white shadow shadow-sky-900/40">
+            <div className="relative mx-auto max-w-[440px] lg:max-w-none">
+              {/* Dashboard mockup */}
+              <div className="relative rounded-2xl border border-white/10 bg-slate-900/80 p-5 shadow-2xl shadow-black/50 backdrop-blur-sm ring-1 ring-white/5">
+                {/* Header bar */}
+                <div className="mb-4 flex items-center gap-2.5">
+                  <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-sky-500 to-indigo-600 text-[10px] font-bold text-white shadow shadow-sky-900/50">
                     H
                   </div>
-                  <div>
-                    <div className="text-[10px] font-semibold uppercase tracking-[0.25em] text-sky-300/80">
+                  <div className="leading-tight">
+                    <div className="text-[9px] font-semibold uppercase tracking-[0.3em] text-sky-300/70">
                       Household
                     </div>
-                    <div className="text-sm font-light text-white">Good evening</div>
+                    <div className="text-[13px] font-light text-white">Good evening</div>
                   </div>
                 </div>
 
-                {/* Needs action card */}
-                <div className="rounded-xl border border-rose-400/30 bg-gradient-to-br from-rose-500/[0.12] to-slate-950/80 p-4">
-                  <div className="mb-3 border-l-2 border-rose-400/80 pl-2.5">
-                    <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-rose-300/90">
+                {/* Needs action panel */}
+                <div className="rounded-xl border border-rose-400/30 bg-gradient-to-br from-rose-500/[0.10] to-slate-950/90 p-3.5">
+                  <div className="mb-2.5 border-l-2 border-rose-400/80 pl-2.5">
+                    <p className="text-[8px] font-semibold uppercase tracking-[0.25em] text-rose-300/80">
                       Needs action
                     </p>
-                    <p className="text-sm font-semibold text-white">
+                    <p className="text-[13px] font-semibold text-white">
                       Overdue, today & this week
                     </p>
                   </div>
 
-                  {/* MOT overdue */}
-                  <div className="mb-2 rounded-lg border border-rose-500/30 bg-rose-950/30 px-3 py-2.5">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <span className="font-mono text-xs text-rose-50">AB12 CDE</span>
-                        <span className="ml-2 text-[10px] text-rose-200/70">
+                  {/* MOT overdue item */}
+                  <div className="mb-2 rounded-lg border border-rose-500/30 bg-rose-950/30 px-3 py-2">
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="min-w-0">
+                        <span className="font-mono text-[12px] font-medium text-rose-50">
+                          AB12 CDE
+                        </span>
+                        <span className="ml-2 text-[10px] text-rose-200/60">
                           Vehicle · MOT overdue
                         </span>
                       </div>
-                      <span className="rounded-md border border-white/15 px-2 py-0.5 text-[10px] text-sky-200">
+                      <span className="shrink-0 rounded-md border border-white/10 px-2 py-0.5 text-[10px] text-sky-200/90">
                         Fix MOT
                       </span>
                     </div>
                   </div>
 
-                  {/* Reminder due today */}
-                  <div className="rounded-lg border border-amber-500/25 bg-amber-500/10 px-3 py-2.5">
+                  {/* Due today */}
+                  <div className="rounded-lg border border-amber-500/20 bg-amber-500/[0.08] px-3 py-2">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs text-white">Renew home insurance</span>
-                      <span className="text-[10px] tabular-nums text-amber-200/90">
+                      <span className="text-[12px] text-white">
+                        Renew home insurance
+                      </span>
+                      <span className="text-[10px] tabular-nums text-amber-200/80">
                         Today
                       </span>
                     </div>
                   </div>
                 </div>
 
-                {/* Bin day widget */}
-                <div className="mt-4 rounded-xl border border-lime-500/25 bg-lime-500/[0.06] p-4">
-                  <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-lime-300/70">
+                {/* Bin day chip */}
+                <div className="mt-3 rounded-xl border border-lime-500/20 bg-lime-500/[0.05] p-3.5">
+                  <p className="text-[8px] font-semibold uppercase tracking-[0.25em] text-lime-300/60">
                     Next bin day
                   </p>
-                  <p className="mt-1 text-sm font-medium text-white">
+                  <p className="mt-1 text-[13px] font-medium text-white">
                     Recycling{' '}
-                    <span className="font-normal tabular-nums text-lime-200/90">
+                    <span className="font-normal tabular-nums text-lime-200/80">
                       — Mon 12 May
                     </span>
                   </p>
                 </div>
 
-                <p className="mt-4 text-center text-[10px] text-slate-600">
-                  ← Real product screenshot coming soon →
+                {/* Placeholder note */}
+                <p className="mt-3 text-center text-[10px] text-slate-600/60 italic">
+                  Real product screenshot coming soon
                 </p>
               </div>
 
-              {/* Decorative subtle glow behind the card */}
+              {/* Outer glow */}
               <div
-                className="pointer-events-none absolute -inset-4 -z-10"
+                className="pointer-events-none absolute -inset-6 -z-10"
                 style={{
                   background:
-                    'radial-gradient(ellipse at 50% 40%, rgba(56,189,248,0.06), transparent 70%)',
+                    'radial-gradient(ellipse at 50% 45%, rgba(14,165,233,0.04), transparent 65%)',
                 }}
                 aria-hidden="true"
               />
@@ -166,167 +187,86 @@ function HeroSection() {
 }
 
 /* ─────────────────────────────────────────────
-   WHY THIS MATTERS / COST URGENCY
-   ───────────────────────────────────────────── */
-function CostUrgencySection() {
-  return (
-    <section className="section-padding bg-warm-50">
-      <Container>
-        <div className="mx-auto max-w-3xl text-left">
-          <p className="kicker-amber mb-4">The cost</p>
-          <h2 className="heading mb-6">
-            Missed renewals cost UK households hundreds every year. Here's what you
-            shouldn't be tracking from memory.
-          </h2>
-          <p className="body-text">
-            Most households track MOTs, insurance, bin day, council tax, and school dates across
-            notes apps, shared calendars, paper reminders, and &ldquo;I&rsquo;ll remember.&rdquo; 
-            The average household loses hundreds of pounds a year to missed renewals, late fees, and 
-            penalty charges — and that&rsquo;s before counting the stress.
-          </p>
-        </div>
-
-        <div className="mt-14 grid gap-6 sm:grid-cols-3">
-          <StatCard
-            kicker="MOT expiry"
-            value="£1,000"
-            label="Fine for driving without a valid MOT. And your insurance may be invalid too."
-          />
-          <StatCard
-            kicker="Insurance auto-renew"
-            value="£200+"
-            label="Average overpay when policies auto-renew without comparison. Per vehicle."
-            accent="amber"
-          />
-          <StatCard
-            kicker="Late fees & penalties"
-            value="£100s"
-            label="Council tax late payment, parking penalties, missed compliance deadlines."
-            accent="amber"
-          />
-        </div>
-
-        <p className="mx-auto mt-10 max-w-2xl text-center text-sm text-warm-400">
-          These aren&rsquo;t rare. They&rsquo;re the admin every household generates — and most lose
-          track of.
-        </p>
-      </Container>
-    </section>
-  );
-}
-
-function StatCard({
-  kicker,
-  value,
-  label,
-  accent,
-}: {
-  kicker: string;
-  value: string;
-  label: string;
-  accent?: 'amber';
-}) {
-  return (
-    <div className="card-stat text-center sm:text-left">
-      <p className={accent === 'amber' ? 'kicker-amber' : 'kicker-teal'}>{kicker}</p>
-      <p
-        className={`mt-3 font-serif text-[3rem] leading-none font-medium tracking-tight ${
-          accent === 'amber' ? 'text-amber' : 'text-brand-700'
-        }`}
-      >
-        {value}
-      </p>
-      <p className="mt-2 text-sm leading-relaxed text-warm-500">{label}</p>
-    </div>
-  );
-}
-
-/* ─────────────────────────────────────────────
-   FEATURES
+   FEATURES — what it tracks
    ───────────────────────────────────────────── */
 function FeatureSection() {
+  const features = [
+    {
+      icon: <Car size={22} />,
+      title: 'Vehicles',
+      body: 'Add a registration number and we pull make, model, year, tax status, and MOT expiry from the DVLA. Track every MOT, insurance policy, and tax renewal in one place.',
+    },
+    {
+      icon: <Home size={22} />,
+      title: 'Property',
+      body: 'Set your home address to unlock weather forecasts, bin day predictions, council information, utilities review dates, and local data — all per property.',
+    },
+    {
+      icon: <Bell size={22} />,
+      title: 'Reminders',
+      body: 'Custom and auto-generated reminders with due dates, types, and status tracking. Overdue items surface first. Snooze what you cannot do yet. Mark done when complete.',
+    },
+    {
+      icon: <MapPin size={22} />,
+      title: 'Local information',
+      body: 'Council name, Ordnance Survey Places data, nearby transport links, and neighbourhood context — surfaced automatically from your postcode.',
+    },
+    {
+      icon: <Shield size={22} />,
+      title: 'Neighbourhood safety',
+      body: 'Policing data and crime context via police.uk. Understand your area before you move, renew your insurance, or make decisions about your home.',
+    },
+    {
+      icon: <Trash2 size={22} />,
+      title: 'Waste & recycling',
+      body: 'Bin schedule prediction from recurring collection patterns, with bank holiday awareness. Council links for local rules. Right bin, right day, every time.',
+    },
+    {
+      icon: <GraduationCap size={22} />,
+      title: 'Schools & education',
+      body: 'Nearby schools and colleges surfaced from your property location. Useful when moving, planning catchment areas, or researching a neighbourhood.',
+    },
+    {
+      icon: <Zap size={22} />,
+      title: 'Utilities',
+      body: 'Track your current suppliers, tariff end dates, and contract review windows. Future: community-driven cost comparisons to help you switch and save.',
+    },
+  ];
+
   return (
-    <section id="features" className="section-padding bg-white">
+    <section id="features" className="relative bg-white pt-section pb-section">
       <Container>
-        <p className="kicker-teal mb-4">Everything in one place</p>
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-          <h2 className="heading max-w-2xl">
-            Vehicles, property, local area — all surfaced in a single household dashboard.
+        {/* Section header */}
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="kicker-teal mb-4">What it tracks</p>
+          <h2 className="heading-lg max-w-2xl mx-auto">
+            Every responsibility your
+            <br />
+            household generates.
           </h2>
-          <p className="body-text max-w-md text-warm-400">
-            Not six different apps. One place that knows what you own, where you live, and what needs
-            your attention next.
+          <p className="subhead mt-5 max-w-xl mx-auto">
+            Not six different apps. Not scattered spreadsheets. One dashboard that knows what
+            you own, where you live, and what needs your attention next.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <FeatureCard
-            icon={<Car size={24} />}
-            title="Vehicles"
-            description="MOT, insurance, and tax tracking with DVLA lookup. Add a registration number and we pull the details. Know what&rsquo;s expiring and when."
-          />
-          <FeatureCard
-            icon={<Home size={24} />}
-            title="Property"
-            description="Set your primary home to unlock weather, bin day, council info, utilities review dates, and local data — all per property."
-          />
-          <FeatureCard
-            icon={<Bell size={24} />}
-            title="Reminders"
-            description="Custom and auto-generated reminders with due dates, types, and status tracking. Overdue items surface first. Snooze or mark done."
-          />
-          <FeatureCard
-            icon={<MapPin size={24} />}
-            title="Local info"
-            description="Council name, OS Places data, nearby transport, and neighbourhood context — surfaced from your postcode."
-          />
-          <FeatureCard
-            icon={<Shield size={24} />}
-            title="Safety"
-            description="Neighbourhood policing data and crime context via police.uk API. Know your area before you move or renew."
-          />
-          <FeatureCard
-            icon={<Trash2 size={24} />}
-            title="Waste & recycling"
-            description="Bin day prediction from manual recurring schedules. Bank holiday awareness. Council links. Right bin, right day."
-          />
-        </div>
-
-        {/* Additional row for education + utilities */}
-        <div className="mt-6 grid gap-6 sm:grid-cols-2">
-          <FeatureCard
-            icon={<GraduationCap size={24} />}
-            title="Education"
-            description="Nearby schools and colleges, surfaced from your property location. Useful when moving or planning catchment areas."
-          />
-          <FeatureCard
-            icon={<Zap size={24} />}
-            title="Utilities"
-            description="Track current supplier, tariff end dates, and review windows. Future: community-driven cost comparison to help you switch and save."
-          />
+        {/* Feature grid */}
+        <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {features.map((f) => (
+            <div
+              key={f.title}
+              className="group flex flex-col rounded-xl border border-warm-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
+            >
+              <div className="mb-3.5 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-brand-50 text-brand-700 transition-colors group-hover:bg-brand-100">
+                {f.icon}
+              </div>
+              <h3 className="font-sans text-[15px] font-semibold text-warm-800">{f.title}</h3>
+              <p className="mt-2 text-[14px] leading-relaxed text-warm-500">{f.body}</p>
+            </div>
+          ))}
         </div>
       </Container>
     </section>
-  );
-}
-
-function FeatureCard({
-  icon,
-  title,
-  description,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}) {
-  return (
-    <div className="card-light group">
-      <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-700 transition-colors group-hover:bg-brand-100">
-        {icon}
-      </div>
-      <h3 className="font-sans text-lg font-semibold text-warm-800">{title}</h3>
-      <p className="mt-2 text-[15px] leading-relaxed text-warm-500">{description}</p>
-    </div>
   );
 }
 
@@ -336,46 +276,47 @@ function FeatureCard({
 function HowItWorksSection() {
   const steps = [
     {
-      number: '01',
-      title: 'Add your home & vehicles',
-      description:
-        'Enter your postcode and registration numbers. We pull council data, DVLA records, and surface what matters for your household.',
+      number: '1',
+      title: 'Add your household',
+      body: 'Enter your postcode and vehicle registrations. We pull council data and DVLA records — no manual research required.',
     },
     {
-      number: '02',
-      title: 'We surface what&rsquo;s due',
-      description:
-        'MOT expiry, insurance renewal windows, bin collection dates, tax deadlines — automatically surfaced in your action-first dashboard.',
+      number: '2',
+      title: 'We surface what is due',
+      body: 'MOT expiry, insurance renewal windows, bin collection dates, tax deadlines — automatically identified and prioritised in your dashboard.',
     },
     {
-      number: '03',
+      number: '3',
       title: 'Nothing gets missed',
-      description:
-        'Overdue items, due-today tasks, and this-week deadlines are promoted. Snooze what you can&rsquo;t do yet. Mark done and move on.',
+      body: 'Overdue items appear first. Today\u2019s deadlines are highlighted. This week\u2019s tasks are listed. Snooze, mark done, move on.',
     },
   ];
 
   return (
-    <section className="section-padding bg-warm-50">
+    <section className="bg-warm-50 pt-section pb-section">
       <Container>
-        <p className="kicker-teal mb-4">How it works</p>
-        <h2 className="heading mb-6 max-w-xl">
-          Set it up once. Let it surface what matters.
-        </h2>
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="kicker-teal mb-4">How it works</p>
+          <h2 className="heading-lg">Set it up once.</h2>
+          <p className="subhead mt-5">
+            Add what you own, and the dashboard keeps track of what matters.
+          </p>
+        </div>
 
-        <div className="mt-14 grid gap-8 sm:grid-cols-3">
+        <div className="mt-16 grid gap-10 sm:grid-cols-3">
           {steps.map((step, i) => (
-            <div key={step.number} className="relative">
-              <div className="mb-6 font-mono text-[2.5rem] font-medium leading-none tracking-tight text-brand-200/60">
-                {step.number}
+            <div key={step.number} className="relative flex flex-col items-center text-center">
+              {/* Number */}
+              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-brand-700 shadow-sm ring-1 ring-warm-200">
+                <span className="font-mono text-[1.25rem] font-medium">{step.number}</span>
               </div>
-              <h3 className="font-sans text-xl font-semibold text-warm-800">{step.title}</h3>
-              <p className="mt-3 text-[15px] leading-relaxed text-warm-500">
-                {step.description}
-              </p>
+              <h3 className="font-sans text-lg font-semibold text-warm-800">{step.title}</h3>
+              <p className="mt-3 text-[15px] leading-relaxed text-warm-500">{step.body}</p>
+
+              {/* Arrow connector */}
               {i < steps.length - 1 && (
                 <div className="mt-6 hidden sm:block">
-                  <ArrowRight size={20} className="text-warm-300" />
+                  <ArrowRight size={18} className="mx-auto text-warm-300" />
                 </div>
               )}
             </div>
@@ -387,50 +328,119 @@ function HowItWorksSection() {
 }
 
 /* ─────────────────────────────────────────────
-   WHO IT'S FOR
+   COST URGENCY — the problem
+   ───────────────────────────────────────────── */
+function CostUrgencySection() {
+  return (
+    <section className="relative bg-white pt-section pb-section">
+      {/* Top divider */}
+      <div className="section-divider" />
+
+      <Container>
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="kicker-amber mb-4">Why it matters</p>
+          <h2 className="heading-lg max-w-3xl mx-auto">
+            Most households lose hundreds
+            <br />
+            each year to missed admin.
+          </h2>
+          <p className="subhead mt-5 max-w-2xl mx-auto">
+            MOT expiry, insurance auto-renewal traps, council tax penalties, parking fines,
+            missed compliance deadlines. None of these are rare — they are the predictable
+            consequence of tracking everything from memory.
+          </p>
+        </div>
+
+        {/* Stat cards */}
+        <div className="mt-14 grid gap-6 sm:grid-cols-3">
+          <div className="rounded-xl border border-rose-100 bg-rose-50/50 p-7 text-center sm:text-left">
+            <p className="kicker-amber">MOT expiry</p>
+            <p className="mt-2 font-serif text-[2.75rem] leading-none font-medium tracking-tight text-amber">
+              £1,000
+            </p>
+            <p className="mt-2 text-[14px] leading-relaxed text-warm-500">
+              The maximum fine for driving without a valid MOT. Your insurance may also be
+              invalidated. Per vehicle.
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-amber-100 bg-amber-50/40 p-7 text-center sm:text-left">
+            <p className="kicker-amber">Insurance loyalty penalty</p>
+            <p className="mt-2 font-serif text-[2.75rem] leading-none font-medium tracking-tight text-amber">
+              £200+
+            </p>
+            <p className="mt-2 text-[14px] leading-relaxed text-warm-500">
+              The average overpay when a policy auto-renews without comparison. Per vehicle,
+              per year.
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-amber-100 bg-amber-50/40 p-7 text-center sm:text-left">
+            <p className="kicker-amber">Late fees & penalties</p>
+            <p className="mt-2 font-serif text-[2.75rem] leading-none font-medium tracking-tight text-amber">
+              £100s
+            </p>
+            <p className="mt-2 text-[14px] leading-relaxed text-warm-500">
+              Council tax late payment, parking penalties, missed compliance deadlines — the
+              costs add up across a household every year.
+            </p>
+          </div>
+        </div>
+
+        <p className="mx-auto mt-10 max-w-2xl text-center text-[14px] text-warm-400">
+          H.A.B.I.B.I surfaces these before they become problems. Not through guesswork —
+          through actual DVLA lookups, council data, and your own recurring schedules.
+        </p>
+      </Container>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   AUDIENCE — who it is for
    ───────────────────────────────────────────── */
 function AudienceSection() {
   const personas = [
     {
-      label: 'Busy parents',
-      description:
-        'School dates, bin day, MOTs — you&rsquo;re tracking 30+ recurring dates across five different places. One dashboard replaces them all.',
-    },
-    {
       label: 'Homeowners',
-      description:
-        'Everything the landlord used to handle is now on you. We help you learn what to track and make sure nothing slips through.',
+      body: 'Everything the landlord used to handle is now on you — buildings insurance, boiler servicing, bin schedules, council tax. H.A.B.I.B.I helps you learn what to track and ensures nothing is overlooked.',
     },
     {
-      label: 'Landlords',
-      description:
-        'Multiple properties, multiple councils, multiple compliance dates. Manage every property from a single account.',
+      label: 'Parents & families',
+      body: 'School inset days, parents\u2019 evenings, MOTs, insurance renewals, bin collections — you are tracking 30+ recurring dates across calendars, notes, and memory. One dashboard replaces the mental load.',
+    },
+    {
+      label: 'Landlords & multi-property owners',
+      body: 'Multiple properties mean multiple councils, multiple bin schedules, multiple compliance dates. Manage every property — gas safety, EICR, insurance — from a single account.',
     },
     {
       label: 'Multi-car households',
-      description:
-        'Two or more cars means MOTs, insurance policies, and tax dates that never align. We keep them all straight.',
+      body: 'Each car has its own MOT date, insurance renewal, and tax deadline. They never align. We track them all and surface the next one due, before it becomes urgent.',
     },
     {
-      label: 'Life organisers',
-      description:
-        'You already run your life from spreadsheets and Notion. A purpose-built household OS does it better — with automatic surfacing.',
+      label: 'Renters',
+      body: 'You still have contents insurance, moving dates, tenancy renewals, and utility contracts to manage. H.A.B.I.B.I works for renters too — start with what you control.',
     },
   ];
 
   return (
-    <section className="section-padding bg-white">
+    <section className="bg-warm-50 pt-section pb-section">
       <Container>
-        <p className="kicker-teal mb-4">Built for</p>
-        <h2 className="heading mb-6 max-w-2xl">
-          If any of this sounds familiar, it&rsquo;s for you.
-        </h2>
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="kicker-teal mb-4">Who it is for</p>
+          <h2 className="heading-lg max-w-2xl mx-auto">
+            If you are responsible for a household, this is built for you.
+          </h2>
+          <p className="subhead mt-5">
+            Homeowners, renters, landlords, families, and anyone managing more than one vehicle.
+          </p>
+        </div>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {personas.map((p) => (
             <div key={p.label} className="card-light">
               <h3 className="font-sans text-lg font-semibold text-warm-800">{p.label}</h3>
-              <p className="mt-2 text-[15px] leading-relaxed text-warm-500">{p.description}</p>
+              <p className="mt-2.5 text-[14px] leading-relaxed text-warm-500">{p.body}</p>
             </div>
           ))}
         </div>
@@ -445,71 +455,69 @@ function AudienceSection() {
 function RoadmapSection() {
   const items = [
     {
-      icon: <Bell size={24} />,
+      icon: <Bell size={20} />,
       title: 'Mobile notifications',
-      description:
-        'Push alerts for due dates and deadlines on your phone. Know before something expires — without opening the dashboard.',
-      status: 'in-progress' as const,
+      body: 'Push alerts for due dates and deadlines. Know before something expires — without opening the dashboard.',
+      status: 'live' as const,
+      label: 'In development',
     },
     {
-      icon: <Zap size={24} />,
+      icon: <Phone size={20} />,
       title: 'AI reminder calls',
-      description:
-        'Voice calls when something urgent needs your attention. A phone call you actually want to receive — because it saves you money.',
-      status: 'in-design' as const,
+      body: 'Voice calls when something urgent needs your attention. A phone call you actually want — because it saves you money.',
+      status: 'building' as const,
+      label: 'In design',
     },
     {
-      icon: <ArrowRight size={24} />,
+      icon: <Users size={20} />,
       title: 'Community cost comparison',
-      description:
-        'Utility and insurance cost data from the community. See what similar households pay — and where you could switch and save.',
+      body: 'Utility and insurance cost data from other households. See what similar homes pay — and where you could switch and save.',
       status: 'planned' as const,
+      label: 'Planned',
     },
   ];
 
   return (
-    <section className="section-padding bg-warm-50">
+    <section className="bg-white pt-section pb-section">
       <Container>
-        <p className="kicker-teal mb-4">Coming next</p>
-        <h2 className="heading mb-6 max-w-2xl">
-          What we&rsquo;re building.
-        </h2>
-        <p className="body-text mb-14 max-w-xl">
-          These are the next things on our roadmap. Status labels show where each one is right now.
-          We ship when it&rsquo;s ready, not before.
-        </p>
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="kicker-teal mb-4">Roadmap</p>
+          <h2 className="heading-lg max-w-2xl mx-auto">What we are building next.</h2>
+          <p className="subhead mt-5">
+            Each item carries a status label so you know where it stands. We ship when it is
+            ready, not before.
+          </p>
+        </div>
 
-        <div className="grid gap-6 sm:grid-cols-3">
+        <div className="mt-14 grid gap-6 sm:grid-cols-3">
           {items.map((item) => (
             <div key={item.title} className="card-light">
-              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
+              <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-brand-50 text-brand-700">
                 {item.icon}
               </div>
-              <h3 className="font-sans text-lg font-semibold text-warm-800">{item.title}</h3>
-              <p className="mt-2 text-[15px] leading-relaxed text-warm-500">{item.description}</p>
-              <div className="mt-4">
+              <div className="mb-3">
                 <span
                   className={
-                    item.status === 'in-progress'
-                      ? 'status-in-progress'
-                      : item.status === 'in-design'
-                      ? 'status-in-design'
+                    item.status === 'live'
+                      ? 'status-live'
+                      : item.status === 'building'
+                      ? 'status-building'
                       : 'status-planned'
                   }
                 >
-                  {item.status === 'in-progress'
-                    ? 'In development'
-                    : item.status === 'in-design'
-                    ? 'In design'
-                    : 'Planned'}
+                  {item.label}
                 </span>
               </div>
+              <h3 className="font-sans text-[16px] font-semibold text-warm-800">
+                {item.title}
+              </h3>
+              <p className="mt-2 text-[14px] leading-relaxed text-warm-500">{item.body}</p>
             </div>
           ))}
         </div>
 
-        <p className="mt-8 text-xs text-warm-400">
-          Timelines are targets, not promises. We ship when it&rsquo;s ready.
+        <p className="mt-10 text-center text-xs text-warm-400">
+          Timelines are targets, not promises. We ship when we are confident it is right.
         </p>
       </Container>
     </section>
@@ -520,79 +528,159 @@ function RoadmapSection() {
    PRICING PREVIEW
    ───────────────────────────────────────────── */
 function PricingPreviewSection() {
+  const tiers = [
+    {
+      name: 'Core',
+      kicker: 'Early access',
+      price: 'Free',
+      period: 'during development',
+      description: 'Everything you need to get on top of your household admin. No credit card, no catch.',
+      features: [
+        '1 property',
+        'Up to 2 vehicles',
+        'DVLA lookup & MOT tracking',
+        'Insurance & tax tracking',
+        'Manual reminders',
+        '3-day weather forecast',
+        'Basic bin schedule (1 per property)',
+        'Local info & safety data',
+        'Schools & education data',
+      ],
+      cta: 'Join waitlist',
+      highlighted: true,
+    },
+    {
+      name: 'Plus',
+      kicker: 'Coming later',
+      price: 'Indicative',
+      period: 'likely £5–7 / month',
+      description: 'For active households and families who want automated surfacing and richer coverage.',
+      features: [
+        'Everything in Core',
+        'Up to 3 properties',
+        'Up to 5 vehicles',
+        'Auto-generated reminders (MOT, insurance, tax)',
+        '7-day weather forecast',
+        'Multiple bin schedules per property',
+        'Email alerts for due dates',
+        'Custom reminder types & snooze',
+      ],
+      cta: null,
+      highlighted: false,
+    },
+    {
+      name: 'Estate',
+      kicker: 'Coming later',
+      price: 'Indicative',
+      period: 'likely £10–13 / month',
+      description: 'For landlords, multi-property owners, and anyone who wants the full household OS.',
+      features: [
+        'Everything in Plus',
+        'Unlimited properties & vehicles',
+        'Mobile push notifications',
+        'AI reminder voice calls',
+        'Community utility benchmarking',
+        'Compliance tracking (gas safety, EICR)',
+        'Advanced reporting & export',
+        'Priority support',
+      ],
+      cta: null,
+      highlighted: false,
+    },
+  ];
+
   return (
-    <section className="section-padding bg-white">
+    <section className="bg-warm-50 pt-section pb-section">
       <Container>
-        <p className="kicker-teal mb-4">Pricing</p>
-        <h2 className="heading mb-6 max-w-xl">
-          Free during early access. Simple subscription later.
-        </h2>
-        <p className="body-text mb-14 max-w-xl">
-          No fake prices. No credit card required right now. We&rsquo;ll publish real pricing before
-          anyone pays a penny.
-        </p>
-
-        <div className="grid gap-8 sm:grid-cols-2">
-          {/* Free tier */}
-          <div className="card-light relative border-2 border-brand-200 bg-brand-50/30">
-            <div className="absolute -top-3 left-6">
-              <span className="status-in-progress">Available now</span>
-            </div>
-            <p className="kicker-teal">Early access</p>
-            <p className="mt-3 font-serif text-[2.5rem] leading-none font-medium tracking-tight text-warm-800">
-              Free
-            </p>
-            <p className="mt-2 text-sm text-warm-500">No credit card required</p>
-            <ul className="mt-8 space-y-3">
-              {[
-                'All current features',
-                'Vehicles, property, reminders',
-                'Local info, safety, waste & recycling',
-                'Multi-property support',
-                'Help shape the product',
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-[15px] text-warm-700">
-                  <Check size={18} className="mt-0.5 shrink-0 text-sage" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <a href="#waitlist" className="btn-primary mt-8 w-full text-center">
-              Join the waitlist
-            </a>
-          </div>
-
-          {/* Paid tier (coming) */}
-          <div className="card-light">
-            <p className="kicker-warm">Full membership</p>
-            <p className="mt-3 font-serif text-[2.5rem] leading-none font-medium tracking-tight text-warm-800">
-              TBD
-            </p>
-            <p className="mt-2 text-sm text-warm-500">Simple subscription · price to be confirmed</p>
-            <ul className="mt-8 space-y-3">
-              {[
-                'Everything in early access',
-                'Mobile push notifications',
-                'AI reminder voice calls',
-                'Community cost comparison',
-                'Priority support',
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-[15px] text-warm-700">
-                  <Check size={18} className="mt-0.5 shrink-0 text-warm-300" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <p className="mt-8 text-sm text-warm-400">
-              We&rsquo;ll publish real pricing before anyone pays. One household, one price. No
-              per-vehicle charges. No hidden fees.
-            </p>
-          </div>
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="kicker-teal mb-4">Pricing</p>
+          <h2 className="heading-lg max-w-2xl mx-auto">
+            Free during early access.
+            <br />
+            Fair tiers later.
+          </h2>
+          <p className="subhead mt-5">
+            Everything is free while we build the product. When paid plans arrive, pricing will be
+            published well in advance — no one pays without knowing exactly what they are getting.
+          </p>
         </div>
 
-        <p className="mx-auto mt-10 max-w-xl text-center text-sm text-warm-400">
-          We&rsquo;ll never do per-vehicle pricing, hidden fees, or auto-renew traps. One household,
-          one price. Fair and simple.
+        <div className="mt-14 grid gap-6 lg:grid-cols-3">
+          {tiers.map((tier) => (
+            <div
+              key={tier.name}
+              className={`relative flex flex-col rounded-2xl border bg-white p-8 shadow-sm ${
+                tier.highlighted
+                  ? 'border-brand-300 ring-1 ring-brand-200/50 shadow-md'
+                  : 'border-warm-200'
+              }`}
+            >
+              {tier.highlighted && (
+                <div className="absolute -top-3.5 left-6">
+                  <span className="status-live">Available now</span>
+                </div>
+              )}
+
+              <div>
+                <p
+                  className={
+                    tier.highlighted ? 'kicker-teal' : 'kicker-muted'
+                  }
+                >
+                  {tier.kicker}
+                </p>
+                <p className="mt-2 font-serif text-[2rem] leading-none font-medium tracking-tight text-warm-800">
+                  {tier.name}
+                </p>
+                <p className="mt-1 font-serif text-[2.25rem] leading-none font-medium tracking-tight text-warm-800">
+                  {tier.price}
+                </p>
+                <p className="mt-1 text-[13px] text-warm-400">{tier.period}</p>
+                <p className="mt-3 text-[14px] leading-relaxed text-warm-500">
+                  {tier.description}
+                </p>
+              </div>
+
+              <hr className="my-6 border-warm-200" />
+
+              <ul className="flex-1 space-y-3">
+                {tier.features.map((f) => (
+                  <li key={f} className="flex items-start gap-2.5 text-[14px] text-warm-700">
+                    <Check size={15} className="mt-0.5 shrink-0 text-sage" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+
+              {tier.cta ? (
+                <a href="#waitlist" className="btn-primary mt-7 w-full text-center">
+                  {tier.cta}
+                  <ArrowRight size={16} />
+                </a>
+              ) : (
+                <div className="mt-7 rounded-lg border border-warm-200 bg-warm-50 px-4 py-3.5 text-center">
+                  <p className="text-[13px] text-warm-400">
+                    Available when paid plans launch
+                  </p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Fair pricing promise */}
+        <div className="mx-auto mt-12 max-w-2xl rounded-2xl border border-warm-200 bg-white p-6 text-center shadow-sm">
+          <p className="text-[14px] leading-relaxed text-warm-500">
+            <strong className="text-warm-700">Our pricing principles:</strong> One price per account
+            — no per-vehicle or per-property charges. Clear pricing published before anyone pays.
+            No auto-renewal traps. Cancel any time. Early access users will be offered a
+            grandfather rate when paid plans launch.
+          </p>
+        </div>
+
+        <p className="mx-auto mt-6 max-w-lg text-center text-[13px] text-warm-400">
+          All pricing shown is indicative and may change before launch. We will communicate any
+          changes clearly and well in advance.
         </p>
       </Container>
     </section>
@@ -605,47 +693,47 @@ function PricingPreviewSection() {
 function FaqSection() {
   const faqs = [
     {
-      q: 'What makes this different from a reminders app?',
-      a: 'Reminders apps tell you what you already told them. H.A.B.I.B.I surfaces things you might not have thought to track — MOT expiry pulled from DVLA data, bin day predicted from your council schedule, insurance renewal windows you&rsquo;d otherwise miss. It&rsquo;s proactive, not just a list.',
+      q: 'Is this just a reminders app?',
+      a: 'No. A reminders app can only tell you what you already told it. H.A.B.I.B.I proactively surfaces things you might not have thought to track — MOT expiry from DVLA data, bin day from your council\u2019s collection pattern, insurance renewal windows, and more. It is a household command centre, not a to-do list.',
     },
     {
-      q: 'How does the vehicle lookup work?',
-      a: 'Add your registration number. We pull make, model, year, tax status, and MOT expiry directly from DVLA records. No manual entry for the basics — and we notify you before things expire.',
+      q: 'What does the DVLA vehicle lookup do?',
+      a: 'Enter a UK registration number and we pull the vehicle\u2019s make, model, year, tax status, and MOT expiry directly from DVLA records. No manual data entry for the basics. We then track upcoming renewals and alert you before they expire.',
     },
     {
-      q: 'Does it sync with my calendar?',
-      a: 'Not yet — calendar integration is on the roadmap. For now, the dashboard is your single source of truth for everything household. Push notifications are in active development.',
+      q: 'Does it work for renters?',
+      a: 'Yes. While some features (like bin schedules and council data) are property-specific, renters can still track contents insurance, tenancy renewals, utility contracts, vehicle compliance, and personal reminders. You do not need to own the property to benefit from the dashboard.',
     },
     {
-      q: 'Is my data secure?',
-      a: 'Yes. We use JWT-based authentication, bcrypt-hashed passwords, parameterised database queries via Prisma, and strict input validation on all endpoints. Your household data is never sold, shared, or used for advertising. Full stop.',
+      q: 'Can I manage multiple properties?',
+      a: 'Yes. Multi-property support is built in. Each property gets its own local context — council, bin schedules, weather, and reminders. Landlords can manage compliance dates (gas safety certificates, EICR, insurance) across all properties from one account.',
     },
     {
-      q: 'How much will it cost?',
-      a: 'Free during early access. When we launch paid plans, it&rsquo;ll be a simple subscription — one household, one price. No per-vehicle charges, no surprise fees. Exact pricing will be published well before anyone is asked to pay.',
+      q: 'How is my data protected?',
+      a: 'We use JWT-based authentication with short-lived access tokens, bcrypt-hashed passwords, parameterised database queries via Prisma, and strict input validation on all endpoints. Your household data is never sold, shared, or used for advertising. Full stop.',
     },
     {
-      q: 'Can I use it across multiple properties?',
-      a: 'Yes. Multi-property support is built in from day one. Landlords and people with second homes can manage everything from a single account — each property gets its own local context, bin schedules, and reminders.',
+      q: 'What is actually working right now?',
+      a: 'Vehicle management (DVLA lookup, MOT, insurance, and tax tracking), reminders (typed, status-tracked, with overdue awareness), property intelligence (primary home with weather, local info, and bin schedule prediction with bank holiday handling), and the action-first dashboard. Mobile notifications are in active development.',
     },
     {
-      q: 'What&rsquo;s actually working right now?',
-      a: 'Vehicles (DVLA lookup, MOT, insurance, tax tracking), reminders (typed, status-tracked, overdue-aware), property (primary home with weather, local info, bin schedule prediction with bank holiday awareness), and the action-first dashboard. Mobile notifications and AI calls are in development.',
+      q: 'How much will it cost eventually?',
+      a: 'We have not set final pricing yet. When paid plans launch, it will be a straightforward subscription — one price per household, regardless of how many vehicles or properties you manage. No per-vehicle fees. We will publish pricing well before we ask anyone to pay.',
     },
     {
-      q: 'Where is the data sourced from?',
-      a: 'DVLA for vehicle data, Ordnance Survey Places API for property location, police.uk for neighbourhood safety, Open-Meteo for weather forecasts, and council websites for bin schedules. No black boxes — real, traceable data sources.',
+      q: 'Where does the data come from?',
+      a: 'DVLA for vehicle data. Ordnance Survey Places API for property geolocation. Police.uk for neighbourhood safety. Open-Meteo for weather forecasts. Council websites for bin schedules. We use real, traceable sources — no black boxes.',
     },
   ];
 
   return (
-    <section id="faq" className="section-padding bg-warm-50">
+    <section id="faq" className="bg-white pt-section pb-section">
       <Container>
         <div className="mx-auto max-w-2xl">
-          <p className="kicker-teal mb-4 text-center">Questions</p>
-          <h2 className="heading mb-14 text-center">Before you ask.</h2>
+          <p className="kicker-teal mb-4 text-center">FAQ</p>
+          <h2 className="heading mb-16 text-center">Questions we hear often.</h2>
 
-          <div className="space-y-4">
+          <div className="space-y-3">
             {faqs.map((faq, i) => (
               <FaqItem key={i} question={faq.q} answer={faq.a} />
             ))}
@@ -660,33 +748,31 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="card-light">
+    <div className={`rounded-xl border transition-colors ${open ? 'border-brand-200 bg-brand-50/20 shadow-sm' : 'border-warm-200 bg-white shadow-sm hover:shadow-md'}`}>
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="flex w-full items-start justify-between gap-4 text-left"
+        className="flex w-full items-start justify-between gap-4 px-6 py-5 text-left"
         aria-expanded={open}
       >
-        <span className="font-sans text-[15px] font-semibold text-warm-800">{question}</span>
-        {open ? (
-          <ChevronUp size={20} className="mt-0.5 shrink-0 text-brand-700" />
-        ) : (
-          <ChevronDown size={20} className="mt-0.5 shrink-0 text-warm-300" />
-        )}
+        <span className="font-sans text-[15px] font-semibold text-warm-800 pr-4">
+          {question}
+        </span>
+        <span className={`mt-0.5 shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}>
+          <ChevronDown size={20} className="text-warm-300" />
+        </span>
       </button>
-      <div
-        className={`faq-answer ${open ? 'open' : ''}`}
-        role="region"
-        aria-hidden={!open}
-      >
-        <p className="pt-4 text-[15px] leading-relaxed text-warm-500">{answer}</p>
+      <div className={`faq-answer ${open ? 'open' : ''}`}>
+        <div>
+          <p className="px-6 pb-5 text-[15px] leading-relaxed text-warm-500">{answer}</p>
+        </div>
       </div>
     </div>
   );
 }
 
 /* ─────────────────────────────────────────────
-   WAITLIST / FINAL CTA
+   FINAL CTA / WAITLIST
    ───────────────────────────────────────────── */
 function WaitlistCtaSection() {
   const [email, setEmail] = useState('');
@@ -695,29 +781,42 @@ function WaitlistCtaSection() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim()) return;
-    // In production: POST to waitlist service (Loops, ConvertKit, Resend, etc.)
+    // In production: POST to waitlist service
     setSubmitted(true);
   };
 
   return (
-    <section id="waitlist" className="section-padding bg-slate-900">
+    <section id="waitlist" className="relative bg-slate-900 pt-section pb-section grain-overlay">
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(ellipse 50% 50% at 50% 50%, rgba(13,107,110,0.08), transparent 60%)',
+        }}
+        aria-hidden="true"
+      />
+
       <Container>
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="kicker-light mb-4">Start now</p>
-          <h2 className="font-serif text-[2.5rem] leading-[1.15] font-medium tracking-[-0.01em] text-white sm:text-[3rem]">
-            Your household won&rsquo;t track itself.
+        <div className="relative z-10 mx-auto max-w-2xl text-center">
+          <p className="kicker-light mb-5">Get early access</p>
+          <h2 className="font-serif text-[2.25rem] leading-[1.15] font-medium tracking-[-0.01em] text-white sm:text-[2.75rem]">
+            Your household will not
+            <br />
+            organise itself.
           </h2>
-          <p className="mt-6 text-lg leading-relaxed text-warm-300/80">
-            Join the waitlist. Get early access. Help us build the household OS you&rsquo;ve been
-            improvising without.
+          <p className="subhead-light mt-5 max-w-lg mx-auto">
+            Join the waitlist for early access. Help shape the household OS before it opens
+            to everyone.
           </p>
 
           {submitted ? (
-            <div className="mt-10 rounded-xl border border-sage/30 bg-sage/10 px-8 py-6 text-center">
-              <Check size={32} className="mx-auto mb-3 text-sage" />
-              <p className="text-lg font-semibold text-white">You&rsquo;re on the list.</p>
-              <p className="mt-2 text-sm text-warm-300">
-                We&rsquo;ll be in touch when early access opens. No spam, ever.
+            <div className="mt-10 rounded-2xl border border-sage/25 bg-sage/8 px-8 py-7 text-center backdrop-blur-sm">
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-sage/15">
+                <Check size={28} className="text-sage" />
+              </div>
+              <p className="text-xl font-semibold text-white">You are on the list.</p>
+              <p className="mt-2 text-[14px] text-warm-300">
+                We will be in touch when early access opens. No spam, ever.
               </p>
             </div>
           ) : (
@@ -732,25 +831,25 @@ function WaitlistCtaSection() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@example.com"
-                  className="flex-1 rounded-lg border border-white/15 bg-slate-800 px-4 py-3 text-[15px] text-white placeholder:text-warm-400 focus:border-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-700/30"
+                  placeholder="Enter your email"
+                  className="flex-1 rounded-xl border border-white/15 bg-slate-800/80 px-5 py-3.5 text-[15px] text-white placeholder:text-warm-400 focus:border-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-700/25 backdrop-blur-sm"
                 />
-                <button type="submit" className="btn-primary whitespace-nowrap">
+                <button type="submit" className="btn-primary py-3.5 whitespace-nowrap">
                   Join waitlist
-                  <ArrowRight size={18} className="ml-2" />
+                  <ArrowRight size={16} />
                 </button>
               </div>
-              <p className="mt-4 text-xs text-warm-400">
-                No spam. No sharing. Early access invites go out in batches.
+              <p className="mt-4 text-[13px] text-warm-400">
+                No spam. No sharing your address. Invites go out in batches.
               </p>
             </form>
           )}
 
-          <div className="mx-auto mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-warm-400">
-            <span>Built in the UK</span>
-            <span aria-hidden="true">·</span>
+          <div className="mx-auto mt-14 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[13px] text-warm-400">
+            <span>Built in the United Kingdom</span>
+            <span aria-hidden="true" className="text-warm-500">·</span>
             <span>GDPR compliant</span>
-            <span aria-hidden="true">·</span>
+            <span aria-hidden="true" className="text-warm-500">·</span>
             <span>No credit card required</span>
           </div>
         </div>

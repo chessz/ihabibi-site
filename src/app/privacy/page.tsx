@@ -4,7 +4,7 @@ import Container from '@/components/Container';
 
 export default function PrivacyPage() {
   return (
-    <section className="section-padding bg-white">
+    <section className="bg-white pt-section pb-section">
       <Container>
         <div className="mx-auto max-w-2xl">
           <p className="kicker-teal mb-4">Legal</p>

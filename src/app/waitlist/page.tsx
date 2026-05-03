@@ -15,7 +15,7 @@ export default function WaitlistPage() {
   };
 
   return (
-    <section className="section-padding bg-slate-900">
+    <section className="relative bg-slate-900 pt-section pb-section grain-overlay">
       <Container>
         <div className="mx-auto max-w-2xl text-center">
           <p className="kicker-light mb-4">Early access</p>

@@ -1,33 +1,49 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 16);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-warm-200 bg-warm-50/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-content items-center justify-between px-6 py-4 sm:px-8 lg:px-10">
+    <header
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? 'border-b border-warm-200 bg-warm-50/90 shadow-sm shadow-black/[0.03] backdrop-blur-lg'
+          : 'border-b border-transparent bg-transparent'
+      }`}
+    >
+      <div className="mx-auto flex max-w-content items-center justify-between px-6 py-3.5 sm:px-8 lg:px-10">
         {/* Logo */}
         <Link href="/" className="flex shrink-0 items-center gap-2.5">
           <div
-            className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500 to-indigo-600 text-sm font-bold text-white shadow-lg shadow-sky-900/20"
+            className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-sky-500 to-indigo-600 text-[10px] font-bold text-white shadow-sm shadow-sky-900/25"
             aria-hidden="true"
           >
             H
           </div>
           <div className="leading-tight">
-            <div className="text-xs font-semibold tracking-[0.2em] text-warm-800">
+            <div className="text-[11px] font-semibold tracking-[0.22em] text-warm-800">
               H.A.B.I.B.I
             </div>
-            <div className="hidden text-[11px] text-warm-400 sm:block">Household OS</div>
+            <div className="hidden text-[10px] font-medium text-warm-400 sm:block">
+              Household OS
+            </div>
           </div>
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-2 md:flex" aria-label="Main">
+        <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
           <Link href="/" className="btn-ghost">
             Home
           </Link>
@@ -40,14 +56,14 @@ export default function Header() {
         </nav>
 
         {/* Desktop CTAs */}
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden items-center gap-2.5 md:flex">
           <a
             href="https://app.ihabibi.uk/login"
             className="btn-ghost"
           >
             Sign in
           </a>
-          <Link href="/#waitlist" className="btn-primary">
+          <Link href="/#waitlist" className="btn-primary text-[13px] py-2.5 px-5">
             Join waitlist
           </Link>
         </div>
@@ -60,14 +76,14 @@ export default function Header() {
           aria-expanded={open}
           aria-label={open ? 'Close menu' : 'Open menu'}
         >
-          {open ? <X size={22} /> : <Menu size={22} />}
+          {open ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
 
       {/* Mobile dropdown */}
       {open && (
         <div className="border-t border-warm-200 bg-warm-50 px-6 pb-6 pt-4 md:hidden">
-          <nav className="flex flex-col gap-2" aria-label="Mobile navigation">
+          <nav className="flex flex-col gap-1.5" aria-label="Mobile navigation">
             <Link
               href="/"
               onClick={() => setOpen(false)}
@@ -99,7 +115,7 @@ export default function Header() {
             <Link
               href="/#waitlist"
               onClick={() => setOpen(false)}
-              className="btn-primary mt-1 w-full text-center"
+              className="btn-primary mt-1 w-full text-center text-[14px] py-2.5"
             >
               Join waitlist
             </Link>

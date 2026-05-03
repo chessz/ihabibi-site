@@ -2,151 +2,195 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;450;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
   color-scheme: light;
-  --color-page: #FAF9F7;
-  --color-text-primary: #1A1A1A;
-  --color-text-secondary: #6B6560;
-  --color-text-muted: #9C9792;
-  --color-border: #E8E4E0;
-  --color-accent: #0D6B6E;
-  --color-accent-hover: #0A5558;
 }
 
 html {
   scroll-behavior: smooth;
-  background: var(--color-page);
+  background: #FAF9F7;
 }
 
 body {
-  color: var(--color-text-primary);
-  background: var(--color-page);
-  font-family: 'Inter', 'DM Sans', system-ui, sans-serif;
+  color: #1A1A1A;
+  background: #FAF9F7;
+  font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'cv02', 'cv03', 'cv04';
 }
 
-/* Section padding utility */
-.section-padding {
-  padding-top: 7.5rem;
-  padding-bottom: 7.5rem;
+/* ── Selection ── */
+::selection {
+  background: rgba(13, 107, 110, 0.15);
+  color: #0D6B6E;
 }
 
-@media (max-width: 768px) {
-  .section-padding {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+/* ── Section dividers ── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    #E8E4E0 20%,
+    #E8E4E0 80%,
+    transparent 100%
+  );
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+/* ── Responsive section padding ── */
+.pt-section {
+  padding-top: 6rem;
+}
+.pb-section {
+  padding-bottom: 6rem;
+}
+
+@media (min-width: 768px) {
+  .pt-section {
+    padding-top: 7.5rem;
+  }
+  .pb-section {
+    padding-bottom: 7.5rem;
   }
 }
 
 @layer components {
+  /* ── Buttons ── */
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-lg bg-brand-700 px-6 py-3 text-[15px] font-medium text-white shadow-sm shadow-brand-900/10 transition-all duration-200 hover:bg-brand-800 hover:-translate-y-px hover:shadow-md hover:shadow-brand-900/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-700 focus-visible:outline-offset-2;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-brand-700 px-6 py-3 text-[15px] font-medium text-white shadow-sm shadow-brand-900/10 transition-all duration-200 hover:bg-brand-800 hover:-translate-y-0.5 hover:shadow-md hover:shadow-brand-900/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-700 focus-visible:outline-offset-2 active:translate-y-0;
   }
 
-  .btn-primary-light {
+  .btn-primary-white {
     @apply btn-primary bg-white text-warm-800 hover:bg-warm-50 hover:text-brand-800 shadow-white/10;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-lg border-[1.5px] border-brand-700 bg-transparent px-6 py-3 text-[15px] font-medium text-brand-700 transition-all duration-200 hover:bg-brand-50 hover:-translate-y-px focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-700 focus-visible:outline-offset-2;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border-[1.5px] border-brand-700 bg-transparent px-6 py-3 text-[15px] font-medium text-brand-700 transition-all duration-200 hover:bg-brand-50 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-700 focus-visible:outline-offset-2 active:translate-y-0;
   }
 
   .btn-secondary-light {
-    @apply btn-secondary border-white/30 text-white hover:bg-white/10 hover:text-white;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border-[1.5px] border-white/25 bg-transparent px-6 py-3 text-[15px] font-medium text-white transition-all duration-200 hover:bg-white/10 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/60 focus-visible:outline-offset-2 active:translate-y-0;
   }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-[14px] font-medium text-warm-500 transition-colors duration-200 hover:text-warm-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-700 focus-visible:outline-offset-2;
+    @apply inline-flex items-center rounded-lg px-3.5 py-2 text-[14px] font-medium text-warm-500 transition-colors duration-200 hover:bg-warm-100 hover:text-warm-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-700 focus-visible:outline-offset-2;
   }
 
   .btn-ghost-light {
-    @apply btn-ghost text-warm-300 hover:text-white;
+    @apply inline-flex items-center rounded-lg px-3.5 py-2 text-[14px] font-medium text-warm-300/80 transition-colors duration-200 hover:bg-white/8 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/60 focus-visible:outline-offset-2;
   }
 
+  /* ── Kicker labels ── */
   .kicker {
-    @apply text-[12px] font-semibold uppercase tracking-[0.15em];
+    @apply text-[11px] font-semibold uppercase tracking-[0.16em];
   }
-
   .kicker-teal {
     @apply kicker text-brand-700;
   }
-
-  .kicker-warm {
-    @apply kicker text-warm-400;
-  }
-
-  .kicker-light {
-    @apply kicker text-warm-300/80;
-  }
-
   .kicker-amber {
     @apply kicker text-amber;
   }
-
-  .heading {
-    @apply font-serif text-[2.25rem] leading-[1.15] font-medium tracking-[-0.01em] text-warm-800;
+  .kicker-muted {
+    @apply kicker text-warm-400;
+  }
+  .kicker-light {
+    @apply kicker text-warm-300/70;
   }
 
+  /* ── Headings ── */
   .heading-lg {
-    @apply font-serif text-[3.25rem] leading-[1.1] font-medium tracking-[-0.015em] text-warm-800;
+    @apply font-serif text-[2.75rem] leading-[1.1] font-medium tracking-[-0.01em] text-warm-800 sm:text-[3.5rem] lg:text-[4rem];
+  }
+  .heading-lg-light {
+    @apply heading-lg text-white;
+  }
+  .heading {
+    @apply font-serif text-[2rem] leading-[1.15] font-medium tracking-[-0.01em] text-warm-800 sm:text-[2.5rem];
+  }
+  .heading-light {
+    @apply heading text-white;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     .heading-lg {
       font-size: 2.25rem;
     }
+    .heading {
+      font-size: 1.75rem;
+    }
   }
 
+  /* ── Body ── */
   .subhead {
-    @apply text-[1.25rem] leading-relaxed text-warm-500;
+    @apply text-[1.125rem] leading-relaxed text-warm-500;
   }
-
+  .subhead-light {
+    @apply subhead text-warm-300/85;
+  }
   .body-text {
-    @apply text-[1.0625rem] leading-relaxed text-warm-500;
+    @apply text-[1rem] leading-relaxed text-warm-500;
+  }
+  .body-text-light {
+    @apply body-text text-warm-300/80;
   }
 
-  .card-base {
-    @apply rounded-card border p-8 transition-shadow duration-200;
+  /* ── Cards ── */
+  .card {
+    @apply rounded-xl border transition-shadow duration-200;
   }
-
   .card-light {
-    @apply card-base border-warm-200 bg-white shadow-sm hover:shadow-md;
+    @apply card border-warm-200 bg-white p-7 shadow-sm hover:shadow-md;
   }
-
   .card-dark {
-    @apply card-base border-white/8 bg-slate-900 shadow-lg shadow-black/20;
+    @apply card border-white/8 bg-slate-900 p-7 shadow-lg shadow-black/20;
   }
-
+  .card-highlight {
+    @apply card border-brand-200 bg-brand-50/30 p-7 shadow-sm;
+  }
   .card-stat {
-    @apply card-base border-warm-200 bg-warm-50;
+    @apply card border-warm-200 bg-warm-50 p-7;
   }
 
+  /* ── Status badges ── */
   .status-badge {
-    @apply inline-flex items-center rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-wider;
+    @apply inline-flex items-center rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em];
   }
-
-  .status-in-progress {
+  .status-live {
     @apply status-badge bg-brand-100 text-brand-800;
   }
-
-  .status-in-design {
+  .status-building {
     @apply status-badge bg-amber/10 text-amber;
   }
-
   .status-planned {
     @apply status-badge bg-warm-100 text-warm-500;
   }
 }
 
-/* FAQ accordion styles */
+/* ── FAQ accordion ── */
 .faq-answer {
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.35s ease;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
 }
 .faq-answer.open {
-  max-height: 24rem;
+  grid-template-rows: 1fr;
+}
+.faq-answer > div {
+  overflow: hidden;
+}
+
+/* ── Grain texture overlay on dark sections ── */
+.grain-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
 }
