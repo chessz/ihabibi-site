@@ -47,34 +47,31 @@ function HeroSection() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse 55% 40% at 45% 35%, rgba(13,107,110,0.10), transparent 55%), radial-gradient(ellipse 80% 50% at 60% 60%, rgba(2,132,199,0.04), transparent 60%)',
+            'radial-gradient(ellipse 55% 40% at 45% 30%, rgba(13,107,110,0.10), transparent 55%), radial-gradient(ellipse 80% 40% at 65% 55%, rgba(2,132,199,0.04), transparent 60%)',
         }}
         aria-hidden="true"
       />
 
       <Container>
-        <div className="relative z-10 flex flex-col gap-12 pt-20 pb-28 lg:flex-row lg:items-center lg:gap-20 lg:pt-28 lg:pb-36">
+        <div className="relative z-10 flex flex-col gap-10 pt-16 pb-20 lg:flex-row lg:items-center lg:gap-16 lg:pt-24 lg:pb-28">
           {/* Left: copy */}
-          <div className="flex-1 lg:max-w-[52%]">
-            <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-warm-300/80 backdrop-blur-sm">
+          <div className="flex-1 lg:max-w-[50%]">
+            <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-warm-300/80 backdrop-blur-sm">
               <span className="h-1.5 w-1.5 rounded-full bg-brand-400" />
               Household OS
             </p>
-            <h1 className="font-serif text-[3.25rem] leading-[1.06] font-medium tracking-[-0.015em] text-white sm:text-[4rem] lg:text-[4.75rem]">
+            <h1 className="font-serif text-[2.75rem] leading-[1.08] font-medium tracking-[-0.015em] text-white sm:text-[3.5rem] lg:text-[4rem]">
               Everything your
               <br />
-              household needs
+              home needs from
               <br />
-              from you, in
-              <br />
-              one place.
+              you. Tracked.
             </h1>
-            <p className="mt-6 max-w-lg text-[1.125rem] leading-relaxed text-warm-300/80">
-              MOTs, insurance, bin day, council deadlines, school dates, utility renewals —
-              surfaced before they become problems. No more missed renewals. No more late-night
-              worry.
+            <p className="mt-5 max-w-md text-[1rem] leading-relaxed text-warm-300/80 sm:text-[1.125rem]">
+              MOTs, insurance, bin day, council deadlines, school dates — surfaced before they
+              become problems. No more late-night worry.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-7 flex flex-wrap gap-3">
               <a href="#waitlist" className="btn-primary">
                 Get early access
                 <ArrowRight size={16} />
@@ -86,64 +83,64 @@ function HeroSection() {
             </div>
 
             {/* Trust micro-line */}
-            <p className="mt-6 text-xs text-warm-400/70">
+            <p className="mt-5 text-xs text-warm-400/70">
               Free during early access. No credit card. Built in the UK.
             </p>
           </div>
 
           {/* Right: product preview */}
           <div className="flex-1">
-            <div className="relative mx-auto max-w-[440px] lg:max-w-none">
+            <div className="relative mx-auto max-w-[380px] lg:max-w-none lg:max-w-[420px] xl:max-w-none">
               {/* Dashboard mockup */}
-              <div className="relative rounded-2xl border border-white/10 bg-slate-900/80 p-5 shadow-2xl shadow-black/50 backdrop-blur-sm ring-1 ring-white/5">
+              <div className="relative rounded-2xl border border-white/10 bg-slate-900/80 p-4 shadow-2xl shadow-black/50 backdrop-blur-sm ring-1 ring-white/5">
                 {/* Header bar */}
-                <div className="mb-4 flex items-center gap-2.5">
-                  <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-sky-500 to-indigo-600 text-[10px] font-bold text-white shadow shadow-sky-900/50">
+                <div className="mb-3.5 flex items-center gap-2">
+                  <div className="flex h-6 w-6 items-center justify-center rounded-md bg-gradient-to-br from-sky-500 to-indigo-600 text-[9px] font-bold text-white shadow shadow-sky-900/50">
                     H
                   </div>
                   <div className="leading-tight">
-                    <div className="text-[9px] font-semibold uppercase tracking-[0.3em] text-sky-300/70">
+                    <div className="text-[8px] font-semibold uppercase tracking-[0.3em] text-sky-300/70">
                       Household
                     </div>
-                    <div className="text-[13px] font-light text-white">Good evening</div>
+                    <div className="text-[12px] font-light text-white">Good evening</div>
                   </div>
                 </div>
 
                 {/* Needs action panel */}
-                <div className="rounded-xl border border-rose-400/30 bg-gradient-to-br from-rose-500/[0.10] to-slate-950/90 p-3.5">
-                  <div className="mb-2.5 border-l-2 border-rose-400/80 pl-2.5">
+                <div className="rounded-xl border border-rose-400/30 bg-gradient-to-br from-rose-500/[0.10] to-slate-950/90 p-3">
+                  <div className="mb-2 border-l-2 border-rose-400/80 pl-2">
                     <p className="text-[8px] font-semibold uppercase tracking-[0.25em] text-rose-300/80">
                       Needs action
                     </p>
-                    <p className="text-[13px] font-semibold text-white">
+                    <p className="text-[12px] font-semibold text-white">
                       Overdue, today & this week
                     </p>
                   </div>
 
                   {/* MOT overdue item */}
-                  <div className="mb-2 rounded-lg border border-rose-500/30 bg-rose-950/30 px-3 py-2">
+                  <div className="mb-1.5 rounded-lg border border-rose-500/30 bg-rose-950/30 px-2.5 py-1.5">
                     <div className="flex items-center justify-between gap-2">
                       <div className="min-w-0">
-                        <span className="font-mono text-[12px] font-medium text-rose-50">
+                        <span className="font-mono text-[11px] font-medium text-rose-50">
                           AB12 CDE
                         </span>
-                        <span className="ml-2 text-[10px] text-rose-200/60">
-                          Vehicle · MOT overdue
+                        <span className="ml-1.5 text-[9px] text-rose-200/60">
+                          MOT overdue
                         </span>
                       </div>
-                      <span className="shrink-0 rounded-md border border-white/10 px-2 py-0.5 text-[10px] text-sky-200/90">
+                      <span className="shrink-0 rounded-md border border-white/10 px-1.5 py-0.5 text-[9px] text-sky-200/90">
                         Fix MOT
                       </span>
                     </div>
                   </div>
 
                   {/* Due today */}
-                  <div className="rounded-lg border border-amber-500/20 bg-amber-500/[0.08] px-3 py-2">
+                  <div className="rounded-lg border border-amber-500/20 bg-amber-500/[0.08] px-2.5 py-1.5">
                     <div className="flex items-center justify-between">
-                      <span className="text-[12px] text-white">
+                      <span className="text-[11px] text-white">
                         Renew home insurance
                       </span>
-                      <span className="text-[10px] tabular-nums text-amber-200/80">
+                      <span className="text-[9px] tabular-nums text-amber-200/80">
                         Today
                       </span>
                     </div>
@@ -151,11 +148,11 @@ function HeroSection() {
                 </div>
 
                 {/* Bin day chip */}
-                <div className="mt-3 rounded-xl border border-lime-500/20 bg-lime-500/[0.05] p-3.5">
+                <div className="mt-2.5 rounded-lg border border-lime-500/20 bg-lime-500/[0.05] p-3">
                   <p className="text-[8px] font-semibold uppercase tracking-[0.25em] text-lime-300/60">
                     Next bin day
                   </p>
-                  <p className="mt-1 text-[13px] font-medium text-white">
+                  <p className="mt-0.5 text-[12px] font-medium text-white">
                     Recycling{' '}
                     <span className="font-normal tabular-nums text-lime-200/80">
                       — Mon 12 May
@@ -164,14 +161,14 @@ function HeroSection() {
                 </div>
 
                 {/* Placeholder note */}
-                <p className="mt-3 text-center text-[10px] text-slate-600/60 italic">
+                <p className="mt-2.5 text-center text-[9px] text-slate-600/60 italic">
                   Real product screenshot coming soon
                 </p>
               </div>
 
               {/* Outer glow */}
               <div
-                className="pointer-events-none absolute -inset-6 -z-10"
+                className="pointer-events-none absolute -inset-4 -z-10"
                 style={{
                   background:
                     'radial-gradient(ellipse at 50% 45%, rgba(14,165,233,0.04), transparent 65%)',
