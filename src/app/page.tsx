@@ -17,6 +17,13 @@ import {
   Clock,
   Phone,
   Users,
+  Banknote,
+  TrendingUp,
+  Receipt,
+  PiggyBank,
+  BarChart3,
+  CalendarX,
+  RefreshCw,
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -24,9 +31,11 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <FeatureSection />
+      <WhyItMattersSection />
+      <WhatYouCanTrackSection />
+      <SeeYourMoneySection />
+      <HowYouSaveSection />
       <HowItWorksSection />
-      <CostUrgencySection />
       <AudienceSection />
       <RoadmapSection />
       <PricingPreviewSection />
@@ -47,7 +56,7 @@ function HeroSection() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse 55% 40% at 45% 30%, rgba(13,107,110,0.10), transparent 55%), radial-gradient(ellipse 80% 40% at 65% 55%, rgba(2,132,199,0.04), transparent 60%)',
+            'radial-gradient(ellipse 55% 40% at 45% 30%, rgba(13,107,110,0.12), transparent 55%), radial-gradient(ellipse 80% 40% at 65% 55%, rgba(2,132,199,0.05), transparent 60%)',
         }}
         aria-hidden="true"
       />
@@ -58,25 +67,25 @@ function HeroSection() {
           <div className="flex-1 lg:max-w-[50%]">
             <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-warm-300/80 backdrop-blur-sm">
               <span className="h-1.5 w-1.5 rounded-full bg-brand-400" />
-              Household OS
+              Household clarity
             </p>
             <h1 className="font-serif text-[2.75rem] leading-[1.08] font-medium tracking-[-0.015em] text-white sm:text-[3.5rem] lg:text-[4rem]">
-              Everything your
+              Know what your
               <br />
-              home needs from
+              home really costs
               <br />
-              you. Tracked.
+              each month.
             </h1>
             <p className="mt-5 max-w-md text-[1rem] leading-relaxed text-warm-300/80 sm:text-[1.125rem]">
-              MOTs, insurance, bin day, council deadlines, school dates — surfaced before they
-              become problems. No more late-night worry.
+              Track bills, utilities, housing, and subscriptions in one place. See your monthly
+              spend, spot savings, and stay ahead of every renewal — before it catches you out.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <a href="#waitlist" className="btn-primary">
                 Get early access
                 <ArrowRight size={16} />
               </a>
-              <a href="#features" className="btn-secondary-light">
+              <a href="#what-it-tracks" className="btn-secondary-light">
                 See what it tracks
                 <ChevronDown size={16} />
               </a>
@@ -88,10 +97,9 @@ function HeroSection() {
             </p>
           </div>
 
-          {/* Right: product preview */}
+          {/* Right: product preview — financial summary mockup */}
           <div className="flex-1">
             <div className="relative mx-auto max-w-[380px] lg:max-w-none lg:max-w-[420px] xl:max-w-none">
-              {/* Dashboard mockup */}
               <div className="relative rounded-2xl border border-white/10 bg-slate-900/80 p-4 shadow-2xl shadow-black/50 backdrop-blur-sm ring-1 ring-white/5">
                 {/* Header bar */}
                 <div className="mb-3.5 flex items-center gap-2">
@@ -102,62 +110,58 @@ function HeroSection() {
                     <div className="text-[8px] font-semibold uppercase tracking-[0.3em] text-sky-300/70">
                       Household
                     </div>
-                    <div className="text-[12px] font-light text-white">Good evening</div>
+                    <div className="text-[12px] font-light text-white">Monthly overview</div>
                   </div>
                 </div>
 
-                {/* Needs action panel */}
-                <div className="rounded-xl border border-rose-400/30 bg-gradient-to-br from-rose-500/[0.10] to-slate-950/90 p-3">
-                  <div className="mb-2 border-l-2 border-rose-400/80 pl-2">
-                    <p className="text-[8px] font-semibold uppercase tracking-[0.25em] text-rose-300/80">
-                      Needs action
+                {/* Summary cards row — monthly spend & due soon */}
+                <div className="mb-3 grid grid-cols-2 gap-2">
+                  <div className="rounded-xl border border-violet-400/20 bg-violet-500/[0.06] p-2.5">
+                    <p className="text-[8px] font-semibold uppercase tracking-[0.2em] text-violet-300/70">
+                      Bills monthly
                     </p>
-                    <p className="text-[12px] font-semibold text-white">
-                      Overdue, today & this week
+                    <p className="mt-1 text-[15px] font-bold tabular-nums text-white">£342</p>
+                  </div>
+                  <div className="rounded-xl border border-amber-400/20 bg-amber-500/[0.06] p-2.5">
+                    <p className="text-[8px] font-semibold uppercase tracking-[0.2em] text-amber-200/70">
+                      Due soon
                     </p>
-                  </div>
-
-                  {/* MOT overdue item */}
-                  <div className="mb-1.5 rounded-lg border border-rose-500/30 bg-rose-950/30 px-2.5 py-1.5">
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="min-w-0">
-                        <span className="font-mono text-[11px] font-medium text-rose-50">
-                          AB12 CDE
-                        </span>
-                        <span className="ml-1.5 text-[9px] text-rose-200/60">
-                          MOT overdue
-                        </span>
-                      </div>
-                      <span className="shrink-0 rounded-md border border-white/10 px-1.5 py-0.5 text-[9px] text-sky-200/90">
-                        Fix MOT
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Due today */}
-                  <div className="rounded-lg border border-amber-500/20 bg-amber-500/[0.08] px-2.5 py-1.5">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[11px] text-white">
-                        Renew home insurance
-                      </span>
-                      <span className="text-[9px] tabular-nums text-amber-200/80">
-                        Today
-                      </span>
-                    </div>
+                    <p className="mt-1 text-[15px] font-bold tabular-nums text-white">4</p>
                   </div>
                 </div>
 
-                {/* Bin day chip */}
-                <div className="mt-2.5 rounded-lg border border-lime-500/20 bg-lime-500/[0.05] p-3">
-                  <p className="text-[8px] font-semibold uppercase tracking-[0.25em] text-lime-300/60">
-                    Next bin day
+                {/* Total household monthly */}
+                <div className="mb-3 rounded-xl border border-lime-400/20 bg-lime-500/[0.06] p-3">
+                  <p className="text-[8px] font-semibold uppercase tracking-[0.2em] text-lime-300/70">
+                    Total household monthly
                   </p>
-                  <p className="mt-0.5 text-[12px] font-medium text-white">
-                    Recycling{' '}
-                    <span className="font-normal tabular-nums text-lime-200/80">
-                      — Mon 12 May
-                    </span>
+                  <p className="mt-0.5 text-[1.25rem] font-bold tabular-nums text-white">£1,847</p>
+                  <p className="mt-0.5 text-[9px] text-slate-400">
+                    Bills + utilities + housing
                   </p>
+                </div>
+
+                {/* Mini spend trend */}
+                <div className="rounded-xl border border-white/8 bg-white/[0.03] p-3">
+                  <p className="text-[8px] font-semibold uppercase tracking-[0.2em] text-slate-400">
+                    Spend trend · this quarter
+                  </p>
+                  <div className="mt-1.5 flex items-end gap-1 h-10">
+                    {[0.45, 0.55, 0.4, 0.65, 0.7, 0.55, 0.75, 0.6, 0.8, 0.7, 0.65, 0.9].map((h, i) => (
+                      <div
+                        key={i}
+                        className="flex-1 rounded-sm"
+                        style={{
+                          height: `${h * 100}%`,
+                          background: `linear-gradient(to top, rgba(163,230,53,0.25), rgba(56,189,248,0.2))`,
+                        }}
+                      />
+                    ))}
+                  </div>
+                  <div className="mt-1 flex justify-between text-[8px] text-slate-500">
+                    <span>Jan</span>
+                    <span>Now</span>
+                  </div>
                 </div>
 
                 {/* Placeholder note */}
@@ -171,7 +175,7 @@ function HeroSection() {
                 className="pointer-events-none absolute -inset-4 -z-10"
                 style={{
                   background:
-                    'radial-gradient(ellipse at 50% 45%, rgba(14,165,233,0.04), transparent 65%)',
+                    'radial-gradient(ellipse at 50% 45%, rgba(14,165,233,0.05), transparent 65%)',
                 }}
                 aria-hidden="true"
               />
@@ -184,10 +188,93 @@ function HeroSection() {
 }
 
 /* ─────────────────────────────────────────────
-   FEATURES — what it tracks
+   WHY IT MATTERS — the financial reality
    ───────────────────────────────────────────── */
-function FeatureSection() {
+function WhyItMattersSection() {
+  return (
+    <section className="relative bg-white pt-section pb-section">
+      <div className="section-divider" />
+
+      <Container>
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="kicker-teal mb-4">Why it matters</p>
+          <h2 className="heading-lg max-w-3xl mx-auto">
+            Most households have no idea
+            <br />
+            what they spend each month.
+          </h2>
+          <p className="subhead mt-5 max-w-2xl mx-auto">
+            Bills, subscriptions, insurance, utilities, housing costs — they sit across different
+            accounts, different dates, different providers. Without a single view, money leaks
+            through unused subscriptions, auto-renewal price hikes, and forgotten deadlines.
+          </p>
+        </div>
+
+        {/* Stat cards */}
+        <div className="mt-14 grid gap-6 sm:grid-cols-3">
+          <div className="rounded-xl border border-rose-100 bg-rose-50/50 p-7 text-center sm:text-left">
+            <p className="kicker-amber">Unnoticed spend</p>
+            <p className="mt-2 font-serif text-[2.75rem] leading-none font-medium tracking-tight text-amber">
+              £100s
+            </p>
+            <p className="mt-2 text-[14px] leading-relaxed text-warm-500">
+              The average household overpays on auto-renewing insurance alone — often by £200 or
+              more. Per policy. Per year.
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-amber-100 bg-amber-50/40 p-7 text-center sm:text-left">
+            <p className="kicker-amber">Forgotten subscriptions</p>
+            <p className="mt-2 font-serif text-[2.75rem] leading-none font-medium tracking-tight text-amber">
+              ~£40/mo
+            </p>
+            <p className="mt-2 text-[14px] leading-relaxed text-warm-500">
+              Streaming, apps, memberships — research shows UK households underestimate recurring
+              subscription spend by roughly £40 per month, about £480 a year.
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-amber-100 bg-amber-50/40 p-7 text-center sm:text-left">
+            <p className="kicker-amber">Late fees & penalties</p>
+            <p className="mt-2 font-serif text-[2.75rem] leading-none font-medium tracking-tight text-amber">
+              £1,000+
+            </p>
+            <p className="mt-2 text-[14px] leading-relaxed text-warm-500">
+              Council tax penalties, MOT fines, parking charges, late payment fees — these hit
+              households every year. They are almost always avoidable.
+            </p>
+          </div>
+        </div>
+
+        <p className="mx-auto mt-10 max-w-2xl text-center text-[14px] text-warm-400">
+          ihabibi brings every recurring household cost into one clear view. No more guessing what
+          leaves your account each month.
+        </p>
+      </Container>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   WHAT YOU CAN TRACK
+   ───────────────────────────────────────────── */
+function WhatYouCanTrackSection() {
   const features = [
+    {
+      icon: <Receipt size={22} />,
+      title: 'Bills & subscriptions',
+      body: 'Track every recurring payment — broadband, streaming, insurance, mobile, memberships. See monthly totals per category, know when each one next renews.',
+    },
+    {
+      icon: <BarChart3 size={22} />,
+      title: 'Household finance',
+      body: 'Visualise total monthly spend split across bills, utilities, and housing. Weekly, biweekly, or monthly trend charts. See fixed vs variable costs at a glance.',
+    },
+    {
+      icon: <Zap size={22} />,
+      title: 'Utilities & energy',
+      body: 'Record your current suppliers, monthly estimates, and tariff end dates. Track what you are paying and when to review your deals.',
+    },
     {
       icon: <Car size={22} />,
       title: 'Vehicles',
@@ -195,13 +282,13 @@ function FeatureSection() {
     },
     {
       icon: <Home size={22} />,
-      title: 'Property',
-      body: 'Set your home address to unlock weather forecasts, bin day predictions, council information, utilities review dates, and local data — all per property.',
+      title: 'Housing costs',
+      body: 'Add mortgage payments, rent, or rental income. Finance aggregates housing alongside bills and utilities — so your total monthly picture is complete.',
     },
     {
       icon: <Bell size={22} />,
-      title: 'Reminders',
-      body: 'Custom and auto-generated reminders with due dates, types, and status tracking. Overdue items surface first. Snooze what you cannot do yet. Mark done when complete.',
+      title: 'Reminders & due dates',
+      body: 'Custom and auto-generated reminders with due dates and status tracking. Overdue items surface first. Snooze what you cannot do yet. Mark done when complete.',
     },
     {
       icon: <MapPin size={22} />,
@@ -223,32 +310,26 @@ function FeatureSection() {
       title: 'Schools & education',
       body: 'Nearby schools and colleges surfaced from your property location. Useful when moving, planning catchment areas, or researching a neighbourhood.',
     },
-    {
-      icon: <Zap size={22} />,
-      title: 'Utilities',
-      body: 'Track your current suppliers, tariff end dates, and contract review windows. Future: community-driven cost comparisons to help you switch and save.',
-    },
   ];
 
   return (
-    <section id="features" className="relative bg-white pt-section pb-section">
+    <section id="what-it-tracks" className="relative bg-warm-50 pt-section pb-section">
       <Container>
-        {/* Section header */}
         <div className="mx-auto max-w-2xl text-center">
-          <p className="kicker-teal mb-4">What it tracks</p>
+          <p className="kicker-teal mb-4">What you can track</p>
           <h2 className="heading-lg max-w-2xl mx-auto">
-            Every responsibility your
+            Every cost your
             <br />
-            household generates.
+            household carries.
           </h2>
           <p className="subhead mt-5 max-w-xl mx-auto">
-            Not six different apps. Not scattered spreadsheets. One dashboard that knows what
-            you own, where you live, and what needs your attention next.
+            From broadband bills to mortgage payments, MOT dates to bin day — one clear dashboard
+            that shows you what is due, what you are spending, and where you could save.
           </p>
         </div>
 
         {/* Feature grid */}
-        <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {features.map((f) => (
             <div
               key={f.title}
@@ -268,6 +349,167 @@ function FeatureSection() {
 }
 
 /* ─────────────────────────────────────────────
+   SEE WHERE YOUR MONEY GOES — trends & graphs
+   ───────────────────────────────────────────── */
+function SeeYourMoneySection() {
+  return (
+    <section className="relative bg-white pt-section pb-section">
+      <div className="section-divider" />
+
+      <Container>
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="kicker-teal mb-4">See your money clearly</p>
+          <h2 className="heading-lg max-w-3xl mx-auto">
+            One picture of your
+            <br />
+            household spend.
+          </h2>
+          <p className="subhead mt-5 max-w-2xl mx-auto">
+            Stop adding up spreadsheets or checking six different bank statements. ihabibi builds
+            your complete spend picture — bills, utilities, and housing — and shows you how it
+            changes over time.
+          </p>
+        </div>
+
+        {/* Visual explainer cards */}
+        <div className="mt-14 grid gap-6 sm:grid-cols-3">
+          <div className="rounded-xl border border-warm-200 bg-warm-50 p-7 text-center">
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
+              <TrendingUp size={24} />
+            </div>
+            <h3 className="font-sans text-[16px] font-semibold text-warm-800">
+              Spend trends over time
+            </h3>
+            <p className="mt-2.5 text-[14px] leading-relaxed text-warm-500">
+              Weekly, biweekly, or monthly stacked charts show your expected spend across utilities,
+              bills, and housing. Spot rising costs before they surprise you.
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-warm-200 bg-warm-50 p-7 text-center">
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
+              <PiggyBank size={24} />
+            </div>
+            <h3 className="font-sans text-[16px] font-semibold text-warm-800">
+              Know what is fixed vs variable
+            </h3>
+            <p className="mt-2.5 text-[14px] leading-relaxed text-warm-500">
+              Fixed costs — bills, housing, regular charges — shown against variable spend. When you
+              cancel a subscription or switch a provider, see the difference in your monthly total.
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-warm-200 bg-warm-50 p-7 text-center">
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
+              <CalendarX size={24} />
+            </div>
+            <h3 className="font-sans text-[16px] font-semibold text-warm-800">
+              Upcoming payments at a glance
+            </h3>
+            <p className="mt-2.5 text-[14px] leading-relaxed text-warm-500">
+              See every dated payment due in the next window — bills, housing, insurance renewals.
+              Know what is coming before it leaves your account.
+            </p>
+          </div>
+        </div>
+
+        {/* Category breakdown visual hint */}
+        <div className="mx-auto mt-12 max-w-2xl rounded-2xl border border-brand-100 bg-brand-50/30 p-7 text-center">
+          <p className="text-[14px] leading-relaxed text-warm-600">
+            <strong className="text-warm-800">Bills category split.</strong> See your monthly bills
+            broken down by type — broadband, streaming, insurance, mobile, and more. A pie chart
+            view helps you spot which categories take the most, and where a cancellation or switch
+            would make the biggest difference.
+          </p>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   HOW IHABIBI HELPS YOU SAVE
+   ───────────────────────────────────────────── */
+function HowYouSaveSection() {
+  const savings = [
+    {
+      icon: <RefreshCw size={24} />,
+      title: 'Spot price creep on auto-renewals',
+      body: 'When an insurance policy or subscription renews at a higher rate, you see it in your monthly total. Timely reminders give you a window to compare and switch before you overpay.',
+    },
+    {
+      icon: <Banknote size={24} />,
+      title: 'Find subscriptions you forgot about',
+      body: 'Every recurring payment is listed by category. When you see the running total, unused streaming services and forgotten memberships become obvious — and easy to cancel.',
+    },
+    {
+      icon: <CalendarX size={24} />,
+      title: 'Avoid missed deadlines and late fees',
+      body: 'MOT expiry, council tax deadlines, insurance renewals — missing any of these costs money. ihabibi surfaces them with enough time to act, not after the penalty lands.',
+    },
+    {
+      icon: <TrendingUp size={24} />,
+      title: 'See if your changes actually lower your spend',
+      body: 'Cancelled a subscription? Switched energy provider? Renegotiated broadband? Watch your monthly total update and your spend trend shift — so you know your effort made a difference.',
+    },
+  ];
+
+  return (
+    <section className="relative bg-slate-950 pt-section pb-section grain-overlay">
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(ellipse 60% 50% at 50% 40%, rgba(13,107,110,0.06), transparent 55%)',
+        }}
+        aria-hidden="true"
+      />
+
+      <Container>
+        <div className="relative z-10 mx-auto max-w-3xl text-center">
+          <p className="kicker-light mb-4">How ihabibi helps you save</p>
+          <h2 className="font-serif text-[2.25rem] leading-[1.15] font-medium tracking-[-0.01em] text-white sm:text-[2.75rem]">
+            Visibility is the
+            <br />
+            first step to saving.
+          </h2>
+          <p className="subhead-light mt-5 max-w-2xl mx-auto">
+            You cannot fix what you cannot see. ihabibi turns scattered household costs into a
+            single clear view — so you spot waste, act on deadlines, and see your savings in real
+            terms.
+          </p>
+        </div>
+
+        <div className="relative z-10 mt-14 grid gap-6 sm:grid-cols-2">
+          {savings.map((s) => (
+            <div
+              key={s.title}
+              className="flex gap-4 rounded-xl border border-white/8 bg-white/[0.04] p-6 backdrop-blur-sm"
+            >
+              <div className="mt-0.5 shrink-0 flex h-10 w-10 items-center justify-center rounded-lg bg-brand-700/30 text-brand-300">
+                {s.icon}
+              </div>
+              <div>
+                <h3 className="font-sans text-[15px] font-semibold text-white">{s.title}</h3>
+                <p className="mt-2 text-[14px] leading-relaxed text-warm-300/75">{s.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="relative z-10 mx-auto mt-10 max-w-2xl rounded-xl border border-brand-500/15 bg-brand-500/[0.06] p-5 text-center backdrop-blur-sm">
+          <p className="text-[13px] leading-relaxed text-warm-300/80">
+            <strong className="text-white">No spreadsheets. No bank-statement archaeology.</strong>{' '}
+            Add your recurring costs once and ihabibi keeps the picture up to date. Cancel or switch
+            something? Update the amount and your spend trend adjusts immediately.
+          </p>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
    HOW IT WORKS
    ───────────────────────────────────────────── */
 function HowItWorksSection() {
@@ -275,17 +517,17 @@ function HowItWorksSection() {
     {
       number: '1',
       title: 'Add your household',
-      body: 'Enter your postcode and vehicle registrations. We pull council data and DVLA records — no manual research required.',
+      body: 'Enter your postcode and vehicle registrations. We pull council data and DVLA records — no manual research required. Add your recurring bills and housing costs in under a minute each.',
     },
     {
       number: '2',
-      title: 'We surface what is due',
-      body: 'MOT expiry, insurance renewal windows, bin collection dates, tax deadlines — automatically identified and prioritised in your dashboard.',
+      title: 'See your monthly spend',
+      body: 'Your total household cost appears — bills, utilities, housing, all in one number. Spend trends, category breakdowns, and fixed vs variable charts make the picture clear.',
     },
     {
       number: '3',
-      title: 'Nothing gets missed',
-      body: 'Overdue items appear first. Today\u2019s deadlines are highlighted. This week\u2019s tasks are listed. Snooze, mark done, move on.',
+      title: 'Stay ahead of every payment',
+      body: 'Overdue items appear first. Today\u2019s deadlines are highlighted. Upcoming payments are listed in date order. Know what is due before it catches you out — and spot your savings as they build.',
     },
   ];
 
@@ -296,7 +538,7 @@ function HowItWorksSection() {
           <p className="kicker-teal mb-4">How it works</p>
           <h2 className="heading-lg">Set it up once.</h2>
           <p className="subhead mt-5">
-            Add what you own, and the dashboard keeps track of what matters.
+            Add what you own and what you pay. The dashboard keeps the picture current.
           </p>
         </div>
 
@@ -325,111 +567,46 @@ function HowItWorksSection() {
 }
 
 /* ─────────────────────────────────────────────
-   COST URGENCY — the problem
-   ───────────────────────────────────────────── */
-function CostUrgencySection() {
-  return (
-    <section className="relative bg-white pt-section pb-section">
-      {/* Top divider */}
-      <div className="section-divider" />
-
-      <Container>
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="kicker-amber mb-4">Why it matters</p>
-          <h2 className="heading-lg max-w-3xl mx-auto">
-            Most households lose hundreds
-            <br />
-            each year to missed admin.
-          </h2>
-          <p className="subhead mt-5 max-w-2xl mx-auto">
-            MOT expiry, insurance auto-renewal traps, council tax penalties, parking fines,
-            missed compliance deadlines. None of these are rare — they are the predictable
-            consequence of tracking everything from memory.
-          </p>
-        </div>
-
-        {/* Stat cards */}
-        <div className="mt-14 grid gap-6 sm:grid-cols-3">
-          <div className="rounded-xl border border-rose-100 bg-rose-50/50 p-7 text-center sm:text-left">
-            <p className="kicker-amber">MOT expiry</p>
-            <p className="mt-2 font-serif text-[2.75rem] leading-none font-medium tracking-tight text-amber">
-              £1,000
-            </p>
-            <p className="mt-2 text-[14px] leading-relaxed text-warm-500">
-              The maximum fine for driving without a valid MOT. Your insurance may also be
-              invalidated. Per vehicle.
-            </p>
-          </div>
-
-          <div className="rounded-xl border border-amber-100 bg-amber-50/40 p-7 text-center sm:text-left">
-            <p className="kicker-amber">Insurance loyalty penalty</p>
-            <p className="mt-2 font-serif text-[2.75rem] leading-none font-medium tracking-tight text-amber">
-              £200+
-            </p>
-            <p className="mt-2 text-[14px] leading-relaxed text-warm-500">
-              The average overpay when a policy auto-renews without comparison. Per vehicle,
-              per year.
-            </p>
-          </div>
-
-          <div className="rounded-xl border border-amber-100 bg-amber-50/40 p-7 text-center sm:text-left">
-            <p className="kicker-amber">Late fees & penalties</p>
-            <p className="mt-2 font-serif text-[2.75rem] leading-none font-medium tracking-tight text-amber">
-              £100s
-            </p>
-            <p className="mt-2 text-[14px] leading-relaxed text-warm-500">
-              Council tax late payment, parking penalties, missed compliance deadlines — the
-              costs add up across a household every year.
-            </p>
-          </div>
-        </div>
-
-        <p className="mx-auto mt-10 max-w-2xl text-center text-[14px] text-warm-400">
-          H.A.B.I.B.I surfaces these before they become problems. Not through guesswork —
-          through actual DVLA lookups, council data, and your own recurring schedules.
-        </p>
-      </Container>
-    </section>
-  );
-}
-
-/* ─────────────────────────────────────────────
    AUDIENCE — who it is for
    ───────────────────────────────────────────── */
 function AudienceSection() {
   const personas = [
     {
       label: 'Homeowners',
-      body: 'Everything the landlord used to handle is now on you — buildings insurance, boiler servicing, bin schedules, council tax. H.A.B.I.B.I helps you learn what to track and ensures nothing is overlooked.',
+      body: 'Buildings insurance, boiler servicing, mortgage payments, bin schedules, council tax — everything the landlord used to handle is now on you. ihabibi helps you track every cost and deadline, and see your full monthly spend in one place.',
     },
     {
       label: 'Parents & families',
-      body: 'School inset days, parents\u2019 evenings, MOTs, insurance renewals, bin collections — you are tracking 30+ recurring dates across calendars, notes, and memory. One dashboard replaces the mental load.',
+      body: 'You are managing 30+ recurring dates and payments — MOTs, insurance, streaming services, school dates, bin collections. One dashboard replaces the mental load and shows you what your household actually costs each month.',
     },
     {
       label: 'Landlords & multi-property owners',
-      body: 'Multiple properties mean multiple councils, multiple bin schedules, multiple compliance dates. Manage every property — gas safety, EICR, insurance — from a single account.',
+      body: 'Multiple properties mean multiple bills, multiple council deadlines, multiple compliance dates. Track costs per property, compare spend across your portfolio, and never miss a gas safety or EICR renewal.',
     },
     {
       label: 'Multi-car households',
-      body: 'Each car has its own MOT date, insurance renewal, and tax deadline. They never align. We track them all and surface the next one due, before it becomes urgent.',
+      body: 'Each car has its own MOT date, insurance renewal, and tax deadline. They never align. We track them all and surface the next one due — alongside your total vehicle running costs.',
     },
     {
       label: 'Renters',
-      body: 'You still have contents insurance, moving dates, tenancy renewals, and utility contracts to manage. H.A.B.I.B.I works for renters too — start with what you control.',
+      body: 'You still have contents insurance, utility contracts, subscriptions, and tenancy renewals to manage. Track what you pay, spot where you can save, and stay on top of every renewal date.',
     },
   ];
 
   return (
-    <section className="bg-warm-50 pt-section pb-section">
+    <section className="bg-white pt-section pb-section">
+      <div className="section-divider" />
+
       <Container>
         <div className="mx-auto max-w-2xl text-center">
           <p className="kicker-teal mb-4">Who it is for</p>
           <h2 className="heading-lg max-w-2xl mx-auto">
-            If you are responsible for a household, this is built for you.
+            Anyone managing a home
+            <br />
+            and its costs.
           </h2>
           <p className="subhead mt-5">
-            Homeowners, renters, landlords, families, and anyone managing more than one vehicle.
+            Homeowners, renters, landlords, families, and anyone with more than one vehicle.
           </p>
         </div>
 
@@ -475,7 +652,7 @@ function RoadmapSection() {
   ];
 
   return (
-    <section className="bg-white pt-section pb-section">
+    <section className="bg-warm-50 pt-section pb-section">
       <Container>
         <div className="mx-auto max-w-2xl text-center">
           <p className="kicker-teal mb-4">Roadmap</p>
@@ -531,12 +708,14 @@ function PricingPreviewSection() {
       kicker: 'Early access',
       price: 'Free',
       period: 'during development',
-      description: 'Everything you need to get on top of your household admin. No credit card, no catch.',
+      description: 'Everything you need to see your household spend and stay on top of every deadline. No credit card, no catch.',
       features: [
         '1 property',
         'Up to 2 vehicles',
         'DVLA lookup & MOT tracking',
         'Insurance & tax tracking',
+        'Bills & subscriptions tracking',
+        'Monthly spend totals & due soon counts',
         'Manual reminders',
         '3-day weather forecast',
         'Basic bin schedule (1 per property)',
@@ -551,11 +730,12 @@ function PricingPreviewSection() {
       kicker: 'Coming later',
       price: 'Indicative',
       period: 'likely £5–7 / month',
-      description: 'For active households and families who want automated surfacing and richer coverage.',
+      description: 'For households that want richer spend insights, automated reminders, and email alerts.',
       features: [
         'Everything in Core',
         'Up to 3 properties',
         'Up to 5 vehicles',
+        'Spend trends & category breakdowns',
         'Auto-generated reminders (MOT, insurance, tax)',
         '7-day weather forecast',
         'Multiple bin schedules per property',
@@ -570,10 +750,11 @@ function PricingPreviewSection() {
       kicker: 'Coming later',
       price: 'Indicative',
       period: 'likely £10–13 / month',
-      description: 'For landlords, multi-property owners, and anyone who wants the full household OS.',
+      description: 'For landlords, multi-property owners, and anyone who wants the full picture across every property.',
       features: [
         'Everything in Plus',
         'Unlimited properties & vehicles',
+        'Per-property spend comparison',
         'Mobile push notifications',
         'AI reminder voice calls',
         'Community utility benchmarking',
@@ -587,7 +768,9 @@ function PricingPreviewSection() {
   ];
 
   return (
-    <section className="bg-warm-50 pt-section pb-section">
+    <section className="bg-white pt-section pb-section">
+      <div className="section-divider" />
+
       <Container>
         <div className="mx-auto max-w-2xl text-center">
           <p className="kicker-teal mb-4">Pricing</p>
@@ -597,8 +780,8 @@ function PricingPreviewSection() {
             Fair tiers later.
           </h2>
           <p className="subhead mt-5">
-            Everything is free while we build the product. When paid plans arrive, pricing will be
-            published well in advance — no one pays without knowing exactly what they are getting.
+            Everything is free while we build. When paid plans arrive, pricing will be published
+            well in advance — no one pays without knowing exactly what they are getting.
           </p>
         </div>
 
@@ -690,8 +873,12 @@ function PricingPreviewSection() {
 function FaqSection() {
   const faqs = [
     {
+      q: 'How does ihabibi help me save money?',
+      a: 'It gives you a single view of every recurring household cost — bills, subscriptions, insurance, utilities, housing. When you can see the total each month, unused services and creeping price rises become obvious. Timely reminders give you a window to switch or cancel before auto-renewals lock you in. And when you do make a change, your spend total updates so you can see the difference.',
+    },
+    {
       q: 'Is this just a reminders app?',
-      a: 'No. A reminders app can only tell you what you already told it. H.A.B.I.B.I proactively surfaces things you might not have thought to track — MOT expiry from DVLA data, bin day from your council\u2019s collection pattern, insurance renewal windows, and more. It is a household command centre, not a to-do list.',
+      a: 'No. A reminders app can only tell you what you already told it. ihabibi proactively surfaces things you might not have thought to track — MOT expiry from DVLA data, bin day from your council\u2019s collection pattern, insurance renewal windows. It also tracks your full household spend across bills, utilities, and housing — something no reminders app does.',
     },
     {
       q: 'What does the DVLA vehicle lookup do?',
@@ -699,11 +886,11 @@ function FaqSection() {
     },
     {
       q: 'Does it work for renters?',
-      a: 'Yes. While some features (like bin schedules and council data) are property-specific, renters can still track contents insurance, tenancy renewals, utility contracts, vehicle compliance, and personal reminders. You do not need to own the property to benefit from the dashboard.',
+      a: 'Yes. While some features (like bin schedules and council data) are property-specific, renters can still track contents insurance, utility contracts, broadband and streaming bills, vehicle compliance, and personal reminders. You can also track your total monthly spend — just like a homeowner.',
     },
     {
       q: 'Can I manage multiple properties?',
-      a: 'Yes. Multi-property support is built in. Each property gets its own local context — council, bin schedules, weather, and reminders. Landlords can manage compliance dates (gas safety certificates, EICR, insurance) across all properties from one account.',
+      a: 'Yes. Multi-property support is built in. Each property gets its own local context — council, bin schedules, weather, and reminders — and its own spend picture. Landlords can compare costs across properties and manage compliance dates from one account.',
     },
     {
       q: 'How is my data protected?',
@@ -711,7 +898,7 @@ function FaqSection() {
     },
     {
       q: 'What is actually working right now?',
-      a: 'Vehicle management (DVLA lookup, MOT, insurance, and tax tracking), reminders (typed, status-tracked, with overdue awareness), property intelligence (primary home with weather, local info, and bin schedule prediction with bank holiday handling), and the action-first dashboard. Mobile notifications are in active development.',
+      a: 'Vehicle management (DVLA lookup, MOT, insurance, and tax tracking), reminders (typed, status-tracked, with overdue awareness), bills and subscriptions tracking with monthly totals and due-soon surfacing, finance overview with spend trends and category breakdowns, and property intelligence (weather, local info, bin schedule prediction). Mobile notifications are in active development.',
     },
     {
       q: 'How much will it cost eventually?',
@@ -724,7 +911,7 @@ function FaqSection() {
   ];
 
   return (
-    <section id="faq" className="bg-white pt-section pb-section">
+    <section id="faq" className="bg-warm-50 pt-section pb-section">
       <Container>
         <div className="mx-auto max-w-2xl">
           <p className="kicker-teal mb-4 text-center">FAQ</p>
@@ -797,13 +984,13 @@ function WaitlistCtaSection() {
         <div className="relative z-10 mx-auto max-w-2xl text-center">
           <p className="kicker-light mb-5">Get early access</p>
           <h2 className="font-serif text-[2.25rem] leading-[1.15] font-medium tracking-[-0.01em] text-white sm:text-[2.75rem]">
-            Your household will not
+            See what your household
             <br />
-            organise itself.
+            really costs each month.
           </h2>
           <p className="subhead-light mt-5 max-w-lg mx-auto">
-            Join the waitlist for early access. Help shape the household OS before it opens
-            to everyone.
+            Join the waitlist for early access. Start tracking your bills, utilities, and housing
+            costs in one clear view — free during development.
           </p>
 
           {submitted ? (
