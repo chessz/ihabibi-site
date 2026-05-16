@@ -24,7 +24,7 @@ export default function Header() {
           : 'border-b border-transparent bg-transparent'
       }`}
     >
-      <div className="mx-auto flex max-w-content items-center justify-between px-6 py-3.5 sm:px-8 lg:px-10">
+      <div className="mx-auto flex max-w-content items-center justify-between px-6 py-2.5 sm:px-8 lg:px-10">
         {/* Logo */}
         <Link href="/" className="flex shrink-0 items-center gap-2.5">
           <Image

@@ -62,31 +62,27 @@ function HeroSection() {
       />
 
       <Container>
-        <div className="relative z-10 flex flex-col gap-10 pt-16 pb-20 lg:flex-row lg:items-center lg:gap-16 lg:pt-24 lg:pb-28">
+        <div className="relative z-10 flex flex-col gap-6 pt-6 pb-12 sm:pt-8 lg:flex-row lg:items-start lg:gap-10 lg:pt-10 lg:pb-14 xl:items-center">
           {/* Left: copy */}
           <div className="flex-1 lg:max-w-[50%]">
-            <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-warm-300/80 backdrop-blur-sm">
+            <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-warm-300/80 backdrop-blur-sm">
               <span className="h-1.5 w-1.5 rounded-full bg-brand-400" />
               UK household dashboard
             </p>
             {/* Headline variants — test A/B later */}
-            <h1 className="font-serif text-[2.75rem] leading-[1.08] font-medium tracking-[-0.015em] text-white sm:text-[3.5rem] lg:text-[4rem]">
-              Your household's
-              <br />
-              running costs,
-              <br />
-              deadlines, and
-              <br />
-              energy benchmarks
-              <br />
+            <h1 className="font-serif text-[2.125rem] leading-[1.12] font-medium tracking-[-0.015em] text-white sm:text-[2.75rem] lg:text-[3.25rem] xl:text-[3.5rem]">
+              Your household&apos;s running costs, deadlines,
+              <br className="hidden sm:block" />
+              {' '}
+              and energy benchmarks{' '}
               <span className="text-brand-300">— one place.</span>
             </h1>
-            <p className="mt-5 max-w-md text-[1rem] leading-relaxed text-warm-300/80 sm:text-[1.125rem]">
+            <p className="mt-4 max-w-md text-[0.9375rem] leading-relaxed text-warm-300/80 sm:text-[1.0625rem]">
               See your monthly spend clearly. Stay ahead of every renewal. Check
               your electricity rate against a public benchmark — so you spot
               overpayment before it rolls over.
             </p>
-            <div className="mt-7 flex flex-wrap gap-3">
+            <div className="mt-5 flex flex-wrap gap-3">
               <a
                 href="https://app.ihabibi.uk/register"
                 className="btn-primary"
@@ -101,7 +97,7 @@ function HeroSection() {
             </div>
 
             {/* Trust micro-line */}
-            <p className="mt-5 text-xs text-warm-400/70">
+            <p className="mt-4 text-xs text-warm-400/70">
               Free tier — one home, no credit card. Built in the UK.
             </p>
           </div>
@@ -195,8 +191,8 @@ function HeroSection() {
                   </p>
                 </div>
 
-                {/* Mini spend trend */}
-                <div className="mt-3 rounded-xl border border-white/8 bg-white/[0.03] p-3">
+                {/* Mini spend trend — hidden below xl so hero CTAs fit above the fold */}
+                <div className="mt-3 hidden rounded-xl border border-white/8 bg-white/[0.03] p-3 xl:block">
                   <p className="text-[8px] font-semibold uppercase tracking-[0.2em] text-slate-400">
                     Spend trend · this quarter
                   </p>
