@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: 'H.A.B.I.B.I — Household costs, renewals & energy benchmarks',
   description:
     'One UK dashboard for monthly household spend, MOT and bill reminders, and electricity tariff checks against public benchmarks. Free to start.',
+  icons: {
+    icon: '/logo.jpeg',
+  },
   openGraph: {
     title: 'H.A.B.I.B.I — Household costs, renewals & energy benchmarks',
     description:

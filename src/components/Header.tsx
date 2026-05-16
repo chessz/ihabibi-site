@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
@@ -26,12 +27,14 @@ export default function Header() {
       <div className="mx-auto flex max-w-content items-center justify-between px-6 py-3.5 sm:px-8 lg:px-10">
         {/* Logo */}
         <Link href="/" className="flex shrink-0 items-center gap-2.5">
-          <div
-            className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-sky-500 to-indigo-600 text-[10px] font-bold text-white shadow-sm shadow-sky-900/25"
-            aria-hidden="true"
-          >
-            H
-          </div>
+          <Image
+            src="/logo.png"
+            alt="H.A.B.I.B.I logo"
+            width={32}
+            height={32}
+            className="h-8 w-8 rounded-lg"
+            priority
+          />
           <div className="leading-tight">
             <div className="text-[11px] font-semibold tracking-[0.22em] text-warm-800">
               H.A.B.I.B.I
