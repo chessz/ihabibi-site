@@ -19,8 +19,8 @@ export default function Footer() {
               </span>
             </div>
             <p className="mt-4 text-[13px] leading-relaxed text-warm-300/80">
-              The household command centre that tracks every renewal, deadline, and
-              responsibility across your home, vehicles, and local area.
+              Stop overpaying and missing household deadlines — one UK dashboard for
+              monthly spend, renewals, and energy benchmarks.
             </p>
           </div>
 

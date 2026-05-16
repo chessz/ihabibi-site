@@ -42,13 +42,16 @@ export default function Header() {
           </div>
         </Link>
 
-        {/* Desktop nav */}
+          {/* Desktop nav */}
         <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
           <Link href="/" className="btn-ghost">
             Home
           </Link>
-          <Link href="/#features" className="btn-ghost">
+          <Link href="/#what-it-tracks" className="btn-ghost">
             Features
+          </Link>
+          <Link href="/#roi" className="btn-ghost">
+            Savings
           </Link>
           <Link href="/#faq" className="btn-ghost">
             FAQ
@@ -63,9 +66,12 @@ export default function Header() {
           >
             Sign in
           </a>
-          <Link href="/#waitlist" className="btn-primary text-[13px] py-2.5 px-5">
-            Join waitlist
-          </Link>
+          <a
+            href="https://app.ihabibi.uk/register"
+            className="btn-primary text-[13px] py-2.5 px-5"
+          >
+            Start free
+          </a>
         </div>
 
         {/* Mobile menu toggle */}
@@ -92,11 +98,18 @@ export default function Header() {
               Home
             </Link>
             <Link
-              href="/#features"
+              href="/#what-it-tracks"
               onClick={() => setOpen(false)}
               className="rounded-lg px-3 py-2.5 text-[15px] font-medium text-warm-700 hover:bg-warm-100"
             >
               Features
+            </Link>
+            <Link
+              href="/#roi"
+              onClick={() => setOpen(false)}
+              className="rounded-lg px-3 py-2.5 text-[15px] font-medium text-warm-700 hover:bg-warm-100"
+            >
+              Savings
             </Link>
             <Link
               href="/#faq"
@@ -112,13 +125,12 @@ export default function Header() {
             >
               Sign in
             </a>
-            <Link
-              href="/#waitlist"
-              onClick={() => setOpen(false)}
+            <a
+              href="https://app.ihabibi.uk/register"
               className="btn-primary mt-1 w-full text-center text-[14px] py-2.5"
             >
-              Join waitlist
-            </Link>
+              Start free
+            </a>
           </nav>
         </div>
       )}

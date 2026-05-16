@@ -4,13 +4,13 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'H.A.B.I.B.I — Household OS',
+  title: 'H.A.B.I.B.I — Household costs, renewals & energy benchmarks',
   description:
-    'The household command centre that tracks every renewal, deadline, and responsibility across your home, vehicles, and local area.',
+    'One UK dashboard for monthly household spend, MOT and bill reminders, and electricity tariff checks against public benchmarks. Free to start.',
   openGraph: {
-    title: 'H.A.B.I.B.I — Household OS',
+    title: 'H.A.B.I.B.I — Household costs, renewals & energy benchmarks',
     description:
-      'MOT, insurance, bin day, council deadlines, school dates — tracked and surfaced before they become problems.',
+      'Stop overpaying and missing household deadlines — one UK dashboard. Track bills, utilities, vehicles, and compare your electricity rate against public benchmarks.',
     type: 'website',
   },
 };
