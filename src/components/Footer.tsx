@@ -12,9 +12,9 @@ export default function Footer() {
               <Image
                 src="/logo.png"
                 alt="H.A.B.I.B.I — Household OS"
-                width={160}
-                height={44}
-                className="h-9 w-auto"
+                width={200}
+                height={52}
+                className="h-10 w-auto sm:h-11"
               />
             </Link>
             <p className="mt-4 text-[13px] leading-relaxed text-warm-300/80">

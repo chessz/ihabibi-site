@@ -30,9 +30,9 @@ export default function Header() {
           <Image
             src="/logo.png"
             alt="H.A.B.I.B.I — Household OS"
-            width={180}
-            height={48}
-            className="h-9 w-auto sm:h-10"
+            width={220}
+            height={56}
+            className="h-11 w-auto sm:h-12 md:h-[3.25rem]"
             priority
           />
         </Link>

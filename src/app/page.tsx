@@ -24,7 +24,7 @@ import {
   Lightbulb,
   ArrowUpRight,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 
 export default function HomePage() {
   return (
@@ -234,6 +234,32 @@ function HeroSection() {
   );
 }
 
+function StatCard({
+  kicker,
+  value,
+  body,
+  className,
+}: {
+  kicker: string;
+  value: ReactNode;
+  body: string;
+  className: string;
+}) {
+  return (
+    <div
+      className={`flex flex-col rounded-xl border p-7 text-left ${className}`}
+    >
+      <p className="kicker-amber">{kicker}</p>
+      <div className="mt-2 flex min-h-[3.25rem] items-end">
+        <p className="font-serif text-[clamp(1.875rem,4.5vw,2.75rem)] leading-none font-medium tracking-tight text-amber">
+          {value}
+        </p>
+      </div>
+      <p className="mt-3 text-[14px] leading-relaxed text-warm-500">{body}</p>
+    </div>
+  );
+}
+
 /* ─────────────────────────────────────────────
    WHY IT MATTERS — the financial reality
    ───────────────────────────────────────────── */
@@ -260,53 +286,43 @@ function WhyItMattersSection() {
 
         {/* Stat cards */}
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="rounded-xl border border-rose-100 bg-rose-50/50 p-7 text-center sm:text-left">
-            <p className="kicker-amber">Unnoticed spend</p>
-            <p className="mt-2 font-serif text-[2.75rem] leading-none font-medium tracking-tight text-amber">
-              £100s
-            </p>
-            <p className="mt-2 text-[14px] leading-relaxed text-warm-500">
-              Industry research suggests typical UK households overpay on
-              auto-renewing insurance alone — often by £200 or more per policy
-              per year.
-            </p>
-          </div>
+          <StatCard
+            kicker="Unnoticed spend"
+            value="£100s"
+            body="Industry research suggests typical UK households overpay on auto-renewing insurance alone — often by £200 or more per policy per year."
+            className="border-rose-100 bg-rose-50/50"
+          />
 
-          <div className="rounded-xl border border-amber-100 bg-amber-50/40 p-7 text-center sm:text-left">
-            <p className="kicker-amber">Forgotten subscriptions</p>
-            <p className="mt-2 font-serif text-[2.75rem] leading-none font-medium tracking-tight text-amber">
-              ~£25–40/mo
-            </p>
-            <p className="mt-2 text-[14px] leading-relaxed text-warm-500">
-              Streaming, apps, memberships — research shows UK households
-              underestimate recurring subscription spend by roughly £25–40 per
-              month.
-            </p>
-          </div>
+          <StatCard
+            kicker="Forgotten subscriptions"
+            value={
+              <span className="inline-flex items-baseline whitespace-nowrap">
+                <span>~£25–40</span>
+                <span className="ml-0.5 text-[0.55em] font-medium opacity-90">/mo</span>
+              </span>
+            }
+            body="Streaming, apps, memberships — research shows UK households underestimate recurring subscription spend by roughly £25–40 per month."
+            className="border-amber-100 bg-amber-50/40"
+          />
 
-          <div className="rounded-xl border border-amber-100 bg-amber-50/40 p-7 text-center sm:text-left">
-            <p className="kicker-amber">Late fees & penalties</p>
-            <p className="mt-2 font-serif text-[2.75rem] leading-none font-medium tracking-tight text-amber">
-              £100+
-            </p>
-            <p className="mt-2 text-[14px] leading-relaxed text-warm-500">
-              Council tax penalties, MOT fines, parking charges, late payment
-              fees — these hit households every year. They are almost always
-              avoidable.
-            </p>
-          </div>
+          <StatCard
+            kicker="Late fees & penalties"
+            value="£100+"
+            body="Council tax penalties, MOT fines, parking charges, late payment fees — these hit households every year. They are almost always avoidable."
+            className="border-amber-100 bg-amber-50/40"
+          />
 
-          <div className="rounded-xl border border-orange-100 bg-orange-50/40 p-7 text-center sm:text-left">
-            <p className="kicker-amber">Energy on the wrong tariff</p>
-            <p className="mt-2 font-serif text-[2.75rem] leading-none font-medium tracking-tight text-amber">
-              £100s/yr
-            </p>
-            <p className="mt-2 text-[14px] leading-relaxed text-warm-500">
-              Many households stay on default rates months after a better deal
-              existed. A simple unit-rate check against a public benchmark can
-              flag hundreds a year.
-            </p>
-          </div>
+          <StatCard
+            kicker="Energy on the wrong tariff"
+            value={
+              <span className="inline-flex items-baseline whitespace-nowrap">
+                <span>£100s</span>
+                <span className="ml-0.5 text-[0.55em] font-medium opacity-90">/yr</span>
+              </span>
+            }
+            body="Many households stay on default rates months after a better deal existed. A simple unit-rate check against a public benchmark can flag hundreds a year."
+            className="border-orange-100 bg-orange-50/40"
+          />
         </div>
 
         <p className="mx-auto mt-10 max-w-2xl text-center text-[14px] text-warm-400">
@@ -315,6 +331,43 @@ function WhyItMattersSection() {
         </p>
       </Container>
     </section>
+  );
+}
+
+function RoiRow({
+  label,
+  value,
+  highlight,
+}: {
+  label: string;
+  value: string;
+  highlight?: boolean;
+}) {
+  return (
+    <div
+      className={`grid grid-cols-1 gap-1 py-3.5 first:pt-0 sm:grid-cols-[1fr_10.5rem] sm:items-baseline sm:gap-4 ${
+        highlight ? 'pt-4' : ''
+      }`}
+    >
+      <dt
+        className={
+          highlight
+            ? 'text-[15px] font-semibold text-warm-800'
+            : 'text-[15px] text-warm-600'
+        }
+      >
+        {label}
+      </dt>
+      <dd
+        className={`text-left font-medium tabular-nums sm:text-right ${
+          highlight
+            ? 'text-[15px] font-bold text-brand-700'
+            : 'text-[15px] text-warm-800'
+        }`}
+      >
+        {value}
+      </dd>
+    </div>
   );
 }
 
@@ -338,58 +391,36 @@ function RoiSection() {
           </p>
         </div>
 
-        <div className="mx-auto mt-14 max-w-2xl rounded-2xl border border-warm-200 bg-white p-8 shadow-sm">
+        <div className="mx-auto mt-14 max-w-2xl rounded-2xl border border-warm-200 bg-white p-5 shadow-sm sm:p-8">
           <p className="text-center text-[13px] font-semibold uppercase tracking-[0.12em] text-warm-400">
             Typical avoidable household leak (illustrative example)
           </p>
 
-          <div className="mt-6 space-y-3 text-[15px]">
-            <div className="flex items-center justify-between">
-              <span className="text-warm-600">Forgotten subscriptions</span>
-              <span className="font-medium tabular-nums text-warm-800">
-                ~£25–40/mo
-              </span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-warm-600">
-                One insurance auto-renewal
-              </span>
-              <span className="font-medium tabular-nums text-warm-800">
-                ~£15–25/mo equivalent
-              </span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-warm-600">Electricity above benchmark</span>
-              <span className="font-medium tabular-nums text-warm-800">
-                ~£10–30/mo
-              </span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-warm-600">
-                One avoided MOT / council fine
-              </span>
-              <span className="font-medium tabular-nums text-warm-800">
-                £100+ (annualised)
-              </span>
-            </div>
-            <div className="h-px bg-warm-200" />
-            <div className="flex items-center justify-between">
-              <span className="font-semibold text-warm-800">
-                Realistic annual upside
-              </span>
-              <span className="font-bold tabular-nums text-brand-700">
-                £500–1,500+
-              </span>
-            </div>
-          </div>
+          <dl className="mt-6 divide-y divide-warm-100">
+            <RoiRow label="Forgotten subscriptions" value="~£25–40/mo" />
+            <RoiRow label="One insurance auto-renewal" value="~£15–25/mo equivalent" />
+            <RoiRow label="Electricity above benchmark" value="~£10–30/mo" />
+            <RoiRow label="One avoided MOT / council fine" value="£100+ (annualised)" />
+            <RoiRow
+              label="Realistic annual upside"
+              value="£500–1,500+"
+              highlight
+            />
+          </dl>
 
-          <div className="mt-6 rounded-xl border border-brand-100 bg-brand-50/30 p-4 text-center">
+          <div className="mt-6 rounded-xl border border-brand-100 bg-brand-50/30 p-4 text-left sm:text-center">
             <p className="text-[14px] leading-relaxed text-warm-600">
-              H.A.B.I.B.I Starter{' '}
-              <span className="font-semibold text-warm-800">£4.99/mo</span> (£60/yr)
-              <span className="mx-2 text-warm-300">·</span>
-              Pro (most households){' '}
-              <span className="font-semibold text-warm-800">£9.99/mo</span> (£120/yr)
+              <span className="block sm:inline">
+                H.A.B.I.B.I Starter{' '}
+                <span className="font-semibold text-warm-800">£4.99/mo</span>{' '}
+                (£60/yr)
+              </span>
+              <span className="mx-2 hidden text-warm-300 sm:inline">·</span>
+              <span className="mt-2 block sm:mt-0 sm:inline">
+                Pro (most households){' '}
+                <span className="font-semibold text-warm-800">£9.99/mo</span>{' '}
+                (£120/yr)
+              </span>
             </p>
           </div>
         </div>
