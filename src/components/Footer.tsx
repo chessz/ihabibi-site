@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -7,17 +8,15 @@ export default function Footer() {
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-2.5">
-              <div
-                className="flex h-7 w-7 items-center justify-center rounded-md bg-gradient-to-br from-sky-500 to-indigo-600 text-[10px] font-bold text-white shadow-sm shadow-sky-900/30"
-                aria-hidden="true"
-              >
-                H
-              </div>
-              <span className="text-[11px] font-semibold tracking-[0.22em] text-white">
-                H.A.B.I.B.I
-              </span>
-            </div>
+            <Link href="/" aria-label="H.A.B.I.B.I — Household OS">
+              <Image
+                src="/logo.png"
+                alt="H.A.B.I.B.I — Household OS"
+                width={160}
+                height={44}
+                className="h-9 w-auto"
+              />
+            </Link>
             <p className="mt-4 text-[13px] leading-relaxed text-warm-300/80">
               Stop overpaying and missing household deadlines — one UK dashboard for
               monthly spend, renewals, and energy benchmarks.

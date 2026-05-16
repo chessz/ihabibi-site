@@ -26,23 +26,15 @@ export default function Header() {
     >
       <div className="mx-auto flex max-w-content items-center justify-between px-6 py-2.5 sm:px-8 lg:px-10">
         {/* Logo */}
-        <Link href="/" className="flex shrink-0 items-center gap-2.5">
+        <Link href="/" className="flex shrink-0 items-center" aria-label="H.A.B.I.B.I — Household OS">
           <Image
             src="/logo.png"
-            alt="H.A.B.I.B.I logo"
-            width={32}
-            height={32}
-            className="h-8 w-8 rounded-lg"
+            alt="H.A.B.I.B.I — Household OS"
+            width={180}
+            height={48}
+            className="h-9 w-auto sm:h-10"
             priority
           />
-          <div className="leading-tight">
-            <div className="text-[11px] font-semibold tracking-[0.22em] text-warm-800">
-              H.A.B.I.B.I
-            </div>
-            <div className="hidden text-[10px] font-medium text-warm-400 sm:block">
-              Household OS
-            </div>
-          </div>
         </Link>
 
           {/* Desktop nav */}
