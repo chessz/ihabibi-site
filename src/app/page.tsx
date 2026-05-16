@@ -313,7 +313,7 @@ function WhyItMattersSection() {
           />
 
           <StatCard
-            kicker="Energy on the wrong tariff"
+            kicker="Wrong tariff (Energy)"
             value={
               <span className="inline-flex items-baseline whitespace-nowrap">
                 <span>£100s</span>
