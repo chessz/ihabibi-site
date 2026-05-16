@@ -398,7 +398,7 @@ function RoiSection() {
 
           <dl className="mt-6 divide-y divide-warm-100">
             <RoiRow label="Forgotten subscriptions" value="~£25–40/mo" />
-            <RoiRow label="One insurance auto-renewal" value="~£15–25/mo equivalent" />
+            <RoiRow label="One insurance auto-renewal" value="~£15–25/mo" />
             <RoiRow label="Electricity above benchmark" value="~£10–30/mo" />
             <RoiRow label="One avoided MOT / council fine" value="£100+ (annualised)" />
             <RoiRow
