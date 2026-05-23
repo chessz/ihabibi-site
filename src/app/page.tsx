@@ -1,6 +1,7 @@
 'use client';
 
 import Container from '@/components/Container';
+import PricingSection from '@/components/PricingSection';
 import Link from 'next/link';
 import {
   Car,
@@ -38,7 +39,7 @@ export default function HomePage() {
       <SeeYourMoneySection />
       <HowItWorksSection />
       <AudienceSection />
-      <PricingPreviewSection />
+      <PricingSection />
       <FaqSection />
       <FinalCtaSection />
     </>
@@ -87,7 +88,7 @@ function HeroSection() {
                 href="https://app.ihabibi.uk/register"
                 className="btn-primary"
               >
-                Start free
+                Create free account
                 <ArrowRight size={16} />
               </a>
               <a href="#roi" className="btn-secondary-light">
@@ -413,13 +414,13 @@ function RoiSection() {
               <span className="block sm:inline">
                 H.A.B.I.B.I Starter{' '}
                 <span className="font-semibold text-warm-800">£4.99/mo</span>{' '}
-                (£60/yr)
+                (£49/yr)
               </span>
               <span className="mx-2 hidden text-warm-300 sm:inline">·</span>
               <span className="mt-2 block sm:mt-0 sm:inline">
-                Pro (most households){' '}
+                Pro{' '}
                 <span className="font-semibold text-warm-800">£9.99/mo</span>{' '}
-                (£120/yr)
+                (£99/yr)
               </span>
             </p>
           </div>
@@ -922,193 +923,6 @@ function AudienceSection() {
 }
 
 /* ─────────────────────────────────────────────
-   PRICING — aligned to product catalog
-   ───────────────────────────────────────────── */
-function PricingPreviewSection() {
-  const tiers = [
-    {
-      name: 'Free',
-      kicker: 'Start here',
-      price: '£0',
-      period: 'One home',
-      description:
-        'Bills, basic utility comparison, vehicles & reminders. No credit card required.',
-      features: [
-        '1 property',
-        'Bills & subscriptions tracking',
-        'Basic utility comparison',
-        'DVLA lookup & MOT tracking',
-        'Insurance & tax tracking',
-        'Monthly spend totals & due-soon counts',
-        'Manual reminders',
-        'Local info & safety data',
-        'Bin schedule prediction',
-      ],
-      cta: 'Start free',
-      ctaUrl: 'https://app.ihabibi.uk/register',
-      highlighted: false,
-    },
-    {
-      name: 'Starter',
-      kicker: 'Most households',
-      price: '£4.99',
-      period: '/mo · £49/yr',
-      description: 'Up to 3 homes, advanced utility comparison, secure notes.',
-      features: [
-        'Everything in Free',
-        'Up to 3 properties',
-        'Advanced utility comparison',
-        'Secure notes',
-        'Spend trends & category breakdowns',
-        'Auto-generated reminders',
-        'Custom reminder types & snooze',
-      ],
-      cta: 'Start free',
-      ctaUrl: 'https://app.ihabibi.uk/register',
-      highlighted: true,
-    },
-    {
-      name: 'Pro',
-      kicker: 'Power users',
-      price: '£9.99',
-      period: '/mo · £99/yr',
-      description:
-        'Up to 10 homes, finance charts, optimisation insights.',
-      features: [
-        'Everything in Starter',
-        'Up to 10 properties',
-        'Finance charts & fixed/variable splits',
-        'Optimisation insights',
-        'Per-property spend comparison',
-        'Priority support',
-      ],
-      cta: 'Start free',
-      ctaUrl: 'https://app.ihabibi.uk/register',
-      highlighted: false,
-    },
-    {
-      name: 'Premium',
-      kicker: 'Portfolios',
-      price: '£19.99',
-      period: '/mo · £199/yr',
-      description: 'Unlimited properties. For landlords and large portfolios.',
-      features: [
-        'Everything in Pro',
-        'Unlimited properties',
-        'Advanced reporting & export',
-        'Compliance tracking (gas safety, EICR)',
-        'Community benchmarking when live',
-      ],
-      cta: 'Start free',
-      ctaUrl: 'https://app.ihabibi.uk/register',
-      highlighted: false,
-    },
-  ];
-
-  return (
-    <section id="pricing" className="bg-white pt-section pb-section">
-      <div className="section-divider" />
-
-      <Container>
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="kicker-teal mb-4">Pricing</p>
-          <h2 className="heading-lg max-w-2xl mx-auto">
-            Free to start.
-            <br />
-            Fair when you upgrade.
-          </h2>
-          <p className="subhead mt-5">
-            Start on the free tier. Upgrade when you see the value. No
-            surprises, no auto-renewal traps.
-          </p>
-        </div>
-
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {tiers.map((tier) => (
-            <div
-              key={tier.name}
-              className={`relative flex flex-col rounded-2xl border bg-white p-7 shadow-sm ${
-                tier.highlighted
-                  ? 'border-brand-300 ring-1 ring-brand-200/50 shadow-md'
-                  : 'border-warm-200'
-              }`}
-            >
-              {tier.highlighted && (
-                <div className="absolute -top-3.5 left-6">
-                  <span className="status-live">Most popular</span>
-                </div>
-              )}
-
-              <div>
-                <p
-                  className={
-                    tier.highlighted ? 'kicker-teal' : 'kicker-muted'
-                  }
-                >
-                  {tier.kicker}
-                </p>
-                <p className="mt-2 font-serif text-[1.75rem] leading-none font-medium tracking-tight text-warm-800">
-                  {tier.name}
-                </p>
-                <p className="mt-1 font-serif text-[2.25rem] leading-none font-medium tracking-tight text-warm-800">
-                  {tier.price}
-                </p>
-                <p className="mt-1 text-[13px] text-warm-400">
-                  {tier.period}
-                </p>
-                <p className="mt-3 text-[14px] leading-relaxed text-warm-500">
-                  {tier.description}
-                </p>
-              </div>
-
-              <hr className="my-6 border-warm-200" />
-
-              <ul className="flex-1 space-y-3">
-                {tier.features.map((f) => (
-                  <li
-                    key={f}
-                    className="flex items-start gap-2.5 text-[14px] text-warm-700"
-                  >
-                    <Check size={15} className="mt-0.5 shrink-0 text-sage" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-
-              <a
-                href={tier.ctaUrl}
-                className={`mt-7 w-full text-center ${
-                  tier.highlighted ? 'btn-primary' : 'btn-secondary'
-                }`}
-              >
-                {tier.cta}
-                <ArrowRight size={16} />
-              </a>
-            </div>
-          ))}
-        </div>
-
-        {/* No-brainer line */}
-        <p className="mx-auto mt-10 max-w-xl text-center text-[14px] leading-relaxed text-warm-500">
-          Less than two coffees a month to see every renewal, every
-          subscription, and whether your electricity still looks fair.
-        </p>
-
-        {/* Fair pricing promise */}
-        <div className="mx-auto mt-8 max-w-2xl rounded-2xl border border-warm-200 bg-white p-6 text-center shadow-sm">
-          <p className="text-[14px] leading-relaxed text-warm-500">
-            <strong className="text-warm-700">Our pricing principles:</strong>{' '}
-            One price per account — no per-vehicle or per-property charges.
-            Annual billing saves ~17%. Clear pricing published before anyone
-            pays. No auto-renewal traps. Cancel any time.
-          </p>
-        </div>
-      </Container>
-    </section>
-  );
-}
-
-/* ─────────────────────────────────────────────
    FAQ
    ───────────────────────────────────────────── */
 function FaqSection() {
@@ -1151,11 +965,11 @@ function FaqSection() {
     },
     {
       q: 'What is actually working right now?',
-      a: 'Vehicle management (DVLA lookup, MOT, insurance, and tax tracking), reminders (typed, status-tracked, with overdue awareness), bills and subscriptions tracking with monthly totals and due-soon surfacing, finance overview with spend trends and category breakdowns, property intelligence (weather, local info, bin schedule prediction), and electricity tariff benchmarking against public rates. Mobile notifications are in active development.',
+      a: 'Vehicle management (DVLA lookup, MOT, insurance, and tax tracking), manual reminders with typed categories, bills and subscriptions tracking with monthly totals, spend trends and category breakdowns, property intelligence (weather, local info, bin schedule prediction), electricity tariff benchmarking, and Secure Notes with document uploads on Starter and above. AI reminders run in your browser on Pro. Phone reminder calling is coming soon.',
     },
     {
       q: 'How much does it cost?',
-      a: 'Free for one property. Starter is £4.99/mo or £49/yr for up to 3 properties. Pro is £9.99/mo or £99/yr for up to 10 properties — this suits most households. Premium is £19.99/mo or £199/yr for unlimited properties. Annual billing saves roughly 17%. No per-vehicle or per-property fees.',
+      a: 'Free for one property. Starter is £4.99/mo or £49/yr for up to 3 properties — secure notes, spend insights, and better reminders. Pro is £9.99/mo or £99/yr for up to 10 properties with AI reminders and advanced finance views. Portfolio pricing for unlimited properties starts at £19.99/mo — contact us for onboarding. Annual billing saves roughly 17%.',
     },
     {
       q: 'Where does the data come from?',
@@ -1254,7 +1068,7 @@ function FinalCtaSection() {
               href="https://app.ihabibi.uk/register"
               className="btn-primary px-8 py-3.5"
             >
-              Start free — no card
+              Create free account
               <ArrowRight size={16} />
             </a>
             <span className="hidden text-warm-400 sm:inline">or</span>

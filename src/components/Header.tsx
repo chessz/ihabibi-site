@@ -48,6 +48,9 @@ export default function Header() {
           <Link href="/#roi" className="btn-ghost">
             Savings
           </Link>
+          <Link href="/#pricing" className="btn-ghost">
+            Pricing
+          </Link>
           <Link href="/#faq" className="btn-ghost">
             FAQ
           </Link>
@@ -65,7 +68,7 @@ export default function Header() {
             href="https://app.ihabibi.uk/register"
             className="btn-primary text-[13px] py-2.5 px-5"
           >
-            Start free
+            Create free account
           </a>
         </div>
 
@@ -107,6 +110,13 @@ export default function Header() {
               Savings
             </Link>
             <Link
+              href="/#pricing"
+              onClick={() => setOpen(false)}
+              className="rounded-lg px-3 py-2.5 text-[15px] font-medium text-warm-700 hover:bg-warm-100"
+            >
+              Pricing
+            </Link>
+            <Link
               href="/#faq"
               onClick={() => setOpen(false)}
               className="rounded-lg px-3 py-2.5 text-[15px] font-medium text-warm-700 hover:bg-warm-100"
@@ -124,7 +134,7 @@ export default function Header() {
               href="https://app.ihabibi.uk/register"
               className="btn-primary mt-1 w-full text-center text-[14px] py-2.5"
             >
-              Start free
+              Create free account
             </a>
           </nav>
         </div>
