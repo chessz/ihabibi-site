@@ -1,125 +1,165 @@
-export const APP_ORIGIN = 'https://app.ihabibi.uk';
+/**
+ * Public pricing display helpers.
+ * Plan prices and features are loaded from GET {APP_API}/api/billing/plans
+ * (canonical source: myjarvis backend billing-plans.ts).
+ */
+
+export const APP_ORIGIN =
+  process.env.NEXT_PUBLIC_APP_ORIGIN || 'https://app.ihabibi.uk';
+
+export const APP_API =
+  process.env.NEXT_PUBLIC_APP_API_URL || 'https://app.ihabibi.uk';
 
 export type BillingInterval = 'MONTHLY' | 'YEARLY';
+export type PlanKey = 'FREE' | 'STARTER' | 'PRO' | 'PREMIUM';
+export type PlanAccent = 'default' | 'featured' | 'automation';
 
-export type MarketingPlanKey = 'FREE' | 'STARTER' | 'PRO' | 'PORTFOLIO';
-
-export type MarketingPlan = {
-  key: MarketingPlanKey;
+export type PublicPlan = {
+  key: PlanKey;
   name: string;
-  kicker: string;
   tagline: string;
+  kicker: string;
+  accent: PlanAccent;
+  propertyLimit: number | null;
   monthlyPriceGbp: number;
   yearlyPriceGbp: number;
-  propertyLimit: string;
   features: string[];
-  cta: string;
-  /** featured = Starter (best value), upgrade = Pro */
-  visualTier: 'default' | 'featured' | 'upgrade' | 'portfolio';
+  mostPopular?: boolean;
   contactOnly?: boolean;
+  annualSavingsPercent: number;
 };
 
-export const MARKETING_PLANS: MarketingPlan[] = [
+export const DEFAULT_BILLING_INTERVAL: BillingInterval = 'MONTHLY';
+
+/** Offline fallback — keep in sync with backend billing-plans.ts */
+export const FALLBACK_PLANS: PublicPlan[] = [
   {
     key: 'FREE',
     name: 'Free',
+    tagline: 'One home, no card required',
     kicker: 'Start here',
-    tagline: 'One home, no card required.',
+    accent: 'default',
+    propertyLimit: 1,
     monthlyPriceGbp: 0,
     yearlyPriceGbp: 0,
-    propertyLimit: '1 property',
+    annualSavingsPercent: 0,
     features: [
+      '1 property',
       'Bills & subscriptions tracking',
       'Manual reminders',
       'Basic utility comparison',
       'Local & property info',
-      'DVLA lookup & MOT tracking',
     ],
-    cta: 'Create free account',
-    visualTier: 'default',
   },
   {
     key: 'STARTER',
     name: 'Starter',
+    tagline: 'Secure notes, spend insights, and up to 3 homes',
     kicker: 'Best value',
-    tagline: 'Secure notes, spend insights, and up to 3 homes.',
+    accent: 'featured',
+    propertyLimit: 3,
     monthlyPriceGbp: 4.99,
     yearlyPriceGbp: 49,
-    propertyLimit: 'Up to 3 properties',
+    mostPopular: true,
+    annualSavingsPercent: 18,
     features: [
+      'Up to 3 properties',
       'Secure notes with document uploads',
       'Spend trends & category breakdowns',
       'Advanced utility comparison',
       'Custom reminders & snooze',
-      'Household organisation tools',
     ],
-    cta: 'Choose Starter',
-    visualTier: 'featured',
   },
   {
     key: 'PRO',
     name: 'Pro',
+    tagline: 'AI reminders and deeper finance insights',
     kicker: 'Most automation',
-    tagline: 'AI reminders and deeper finance insights.',
+    accent: 'automation',
+    propertyLimit: 10,
     monthlyPriceGbp: 9.99,
     yearlyPriceGbp: 99,
-    propertyLimit: 'Up to 10 properties',
+    annualSavingsPercent: 17,
     features: [
       'Everything in Starter',
+      'Up to 10 properties',
       'AI reminders in your browser',
       'Advanced finance insights & charts',
       'Per-property spend comparison',
       'Phone reminder calling — coming soon',
     ],
-    cta: 'Start Pro',
-    visualTier: 'upgrade',
+  },
+  {
+    key: 'PREMIUM',
+    name: 'Portfolio',
+    tagline: 'Unlimited properties with dedicated onboarding',
+    kicker: 'Landlords & agencies',
+    accent: 'default',
+    propertyLimit: null,
+    monthlyPriceGbp: 19.99,
+    yearlyPriceGbp: 199,
+    contactOnly: true,
+    annualSavingsPercent: 17,
+    features: [
+      'Unlimited properties',
+      'Everything in Pro',
+      'Portfolio reporting & export',
+      'Compliance tracking (gas safety, EICR)',
+      'Dedicated onboarding — talk to us',
+    ],
   },
 ];
 
-export const PORTFOLIO_PLAN: MarketingPlan = {
-  key: 'PORTFOLIO',
-  name: 'Portfolio',
-  kicker: 'Landlords & agencies',
-  tagline: 'Unlimited properties with dedicated onboarding.',
-  monthlyPriceGbp: 19.99,
-  yearlyPriceGbp: 199,
-  propertyLimit: 'Unlimited properties',
-  features: [
-    'Everything in Pro',
-    'Portfolio reporting & export',
-    'Compliance tracking (gas safety, EICR)',
-    'Dedicated support — talk to us first',
-  ],
-  cta: 'Talk to us',
-  visualTier: 'portfolio',
-  contactOnly: true,
-};
-
-export function annualSavingsPercent(monthly: number, yearly: number): number {
-  if (!monthly) return 0;
-  const monthlyYear = monthly * 12;
-  if (monthlyYear <= yearly) return 0;
-  return Math.round(((monthlyYear - yearly) / monthlyYear) * 100);
+export async function fetchPublicPlans(): Promise<PublicPlan[]> {
+  try {
+    const res = await fetch(`${APP_API}/api/billing/plans`, { cache: 'no-store' });
+    if (!res.ok) return FALLBACK_PLANS;
+    const data = (await res.json()) as PublicPlan[];
+    return Array.isArray(data) && data.length ? data : FALLBACK_PLANS;
+  } catch {
+    return FALLBACK_PLANS;
+  }
 }
 
 export function formatGbp(amount: number): string {
   if (amount === 0) return '£0';
-  return new Intl.NumberFormat('en-GB', {
-    style: 'currency',
-    currency: 'GBP',
-  }).format(amount);
+  return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(amount);
 }
 
-export function planCtaUrl(plan: MarketingPlan, interval: BillingInterval): string {
-  if (plan.key === 'FREE') {
-    return `${APP_ORIGIN}/register`;
-  }
+export function propertyLimitLabel(limit: number | null): string {
+  if (limit === null) return 'Unlimited properties';
+  if (limit === 1) return '1 property';
+  return `Up to ${limit} properties`;
+}
+
+export function planPrice(plan: PublicPlan, interval: BillingInterval): number {
+  return interval === 'YEARLY' ? plan.yearlyPriceGbp : plan.monthlyPriceGbp;
+}
+
+export function yearlySavingsToggleLabel(plans: PublicPlan[]): string {
+  const paid = plans.filter((p) => p.monthlyPriceGbp > 0 && !p.contactOnly);
+  if (!paid.length) return 'save on yearly';
+  const max = Math.max(...paid.map((p) => p.annualSavingsPercent));
+  return max > 0 ? `save ${max}%` : 'save on yearly';
+}
+
+export function planCtaLabel(plan: PublicPlan): string {
+  if (plan.contactOnly) return 'Talk to us';
+  if (plan.key === 'FREE') return 'Create free account';
+  if (plan.key === 'STARTER') return 'Choose Starter';
+  if (plan.key === 'PRO') return 'Start Pro';
+  return 'Subscribe';
+}
+
+export function planCtaUrl(plan: PublicPlan, interval: BillingInterval): string {
+  if (plan.key === 'FREE') return `${APP_ORIGIN}/register`;
   if (plan.contactOnly) {
     return `mailto:hello@ihabibi.uk?subject=${encodeURIComponent('Portfolio plan enquiry')}`;
   }
   return `${APP_ORIGIN}/register?plan=${plan.key}&interval=${interval}`;
 }
 
-export function portfolioCtaUrl(): string {
-  return `mailto:hello@ihabibi.uk?subject=${encodeURIComponent('Portfolio plan enquiry')}`;
+export function monthlyCancelNote(interval: BillingInterval, isPaid: boolean): string | null {
+  if (!isPaid || interval !== 'MONTHLY') return null;
+  return 'Cancel anytime';
 }

@@ -1,51 +1,49 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowRight, Check } from 'lucide-react';
 import Container from '@/components/Container';
 import {
-  MARKETING_PLANS,
-  PORTFOLIO_PLAN,
-  annualSavingsPercent,
+  DEFAULT_BILLING_INTERVAL,
+  FALLBACK_PLANS,
+  fetchPublicPlans,
   formatGbp,
+  monthlyCancelNote,
+  planCtaLabel,
   planCtaUrl,
-  portfolioCtaUrl,
+  planPrice,
+  propertyLimitLabel,
+  yearlySavingsToggleLabel,
   type BillingInterval,
-  type MarketingPlan,
+  type PublicPlan,
 } from '@/lib/pricing-plans';
 
-function PlanCard({
-  plan,
-  interval,
-}: {
-  plan: MarketingPlan;
-  interval: BillingInterval;
-}) {
-  const price = interval === 'YEARLY' ? plan.yearlyPriceGbp : plan.monthlyPriceGbp;
-  const savings = annualSavingsPercent(plan.monthlyPriceGbp, plan.yearlyPriceGbp);
-  const isFeatured = plan.visualTier === 'featured';
-  const isUpgrade = plan.visualTier === 'upgrade';
-  const isFree = plan.key === 'FREE';
+function PlanCard({ plan, interval }: { plan: PublicPlan; interval: BillingInterval }) {
+  const price = planPrice(plan, interval);
+  const isPaid = plan.key !== 'FREE';
+  const isFeatured = plan.accent === 'featured';
+  const isAutomation = plan.accent === 'automation';
+  const cancelNote = monthlyCancelNote(interval, isPaid);
 
   return (
     <div
       className={`relative flex flex-col rounded-2xl border bg-white p-7 shadow-sm ${
         isFeatured
           ? 'border-brand-300 ring-2 ring-brand-200/60 shadow-md lg:scale-[1.02]'
-          : isUpgrade
-            ? 'border-violet-200 ring-1 ring-violet-100/80'
+          : isAutomation
+            ? 'border-brand-200 ring-1 ring-brand-100/80'
             : 'border-warm-200'
       }`}
     >
-      {isFeatured ? (
+      {plan.mostPopular ? (
         <div className="absolute -top-3.5 left-6">
           <span className="status-live">Best value</span>
         </div>
       ) : null}
-      {isUpgrade ? (
+      {isAutomation ? (
         <div className="absolute -top-3.5 right-6">
-          <span className="rounded-full border border-violet-200 bg-violet-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-violet-700">
-            Most automation
+          <span className="rounded-full border border-brand-200 bg-brand-50 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-brand-800">
+            {plan.kicker}
           </span>
         </div>
       ) : null}
@@ -57,16 +55,17 @@ function PlanCard({
         </p>
         <p className="mt-3 font-serif text-[2.25rem] leading-none font-medium tracking-tight text-warm-800">
           {formatGbp(price)}
-          {!isFree ? (
+          {isPaid ? (
             <span className="ml-1 font-sans text-[13px] font-normal text-warm-400">
               /{interval === 'YEARLY' ? 'year' : 'month'}
             </span>
           ) : null}
         </p>
-        {!isFree && interval === 'YEARLY' && savings > 0 ? (
-          <p className="mt-1 text-[12px] text-sage">Save {savings}% vs monthly</p>
+        {interval === 'YEARLY' && plan.annualSavingsPercent > 0 ? (
+          <p className="mt-1 text-[12px] text-sage">Save {plan.annualSavingsPercent}% vs monthly</p>
         ) : null}
-        <p className="mt-2 text-[13px] font-medium text-warm-600">{plan.propertyLimit}</p>
+        {cancelNote ? <p className="mt-1 text-[12px] text-warm-500">{cancelNote}</p> : null}
+        <p className="mt-2 text-[13px] font-medium text-warm-600">{propertyLimitLabel(plan.propertyLimit)}</p>
         <p className="mt-3 text-[14px] leading-relaxed text-warm-500">{plan.tagline}</p>
       </div>
 
@@ -83,17 +82,9 @@ function PlanCard({
 
       <a
         href={planCtaUrl(plan, interval)}
-        className={`mt-7 w-full text-center ${
-          isFeatured
-            ? 'btn-primary'
-            : isUpgrade
-              ? 'inline-flex items-center justify-center gap-2 rounded-xl bg-violet-700 px-5 py-3 text-[14px] font-semibold text-white transition hover:bg-violet-600'
-              : isFree
-                ? 'btn-secondary'
-                : 'btn-secondary'
-        }`}
+        className={`mt-7 w-full text-center ${isFeatured ? 'btn-primary' : 'btn-secondary'}`}
       >
-        {plan.cta}
+        {planCtaLabel(plan)}
         <ArrowRight size={16} />
       </a>
     </div>
@@ -101,7 +92,16 @@ function PlanCard({
 }
 
 export default function PricingSection() {
-  const [interval, setInterval] = useState<BillingInterval>('YEARLY');
+  const [plans, setPlans] = useState<PublicPlan[]>(FALLBACK_PLANS);
+  const [interval, setInterval] = useState<BillingInterval>(DEFAULT_BILLING_INTERVAL);
+  const maxSavings = Math.max(0, ...plans.map((p) => p.annualSavingsPercent));
+
+  useEffect(() => {
+    void fetchPublicPlans().then(setPlans);
+  }, []);
+
+  const consumerPlans = plans.filter((p) => !p.contactOnly);
+  const portfolioPlan = plans.find((p) => p.contactOnly);
 
   return (
     <section id="pricing" className="bg-white pt-section pb-section">
@@ -147,37 +147,48 @@ export default function PricingSection() {
                   : 'text-warm-600 hover:text-warm-800'
               }`}
             >
-              Yearly <span className="text-sage">(save ~17%)</span>
+              Yearly <span className="text-sage">({yearlySavingsToggleLabel(plans)})</span>
             </button>
           </div>
         </div>
 
         <p className="mx-auto mt-4 max-w-lg text-center text-[13px] text-warm-500">
-          Pay annually and save roughly two months compared to monthly billing on Starter and Pro.
+          {interval === 'MONTHLY' ? (
+            <>
+              Paid monthly plans cancel anytime. Switch to yearly to save up to {maxSavings}%.
+            </>
+          ) : (
+            <>Yearly billing is charged once per year — save up to {maxSavings}% vs monthly.</>
+          )}
         </p>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {MARKETING_PLANS.map((plan) => (
+          {consumerPlans.map((plan) => (
             <PlanCard key={plan.key} plan={plan} interval={interval} />
           ))}
         </div>
 
-        <div className="mt-8 rounded-2xl border border-warm-200 bg-warm-50/60 p-6 sm:flex sm:items-center sm:justify-between sm:gap-6">
-          <div>
-            <p className="kicker-muted">{PORTFOLIO_PLAN.kicker}</p>
-            <h3 className="mt-1 font-sans text-lg font-semibold text-warm-800">
-              {PORTFOLIO_PLAN.name}
-            </h3>
-            <p className="mt-1 text-[14px] text-warm-500">{PORTFOLIO_PLAN.tagline}</p>
-            <p className="mt-2 text-[13px] text-warm-400">
-              From {formatGbp(PORTFOLIO_PLAN.monthlyPriceGbp)}/mo · unlimited properties
-            </p>
+        {portfolioPlan ? (
+          <div className="mt-8 rounded-2xl border border-warm-200 bg-warm-50/60 p-6 sm:flex sm:items-center sm:justify-between sm:gap-6">
+            <div>
+              <p className="kicker-muted">{portfolioPlan.kicker}</p>
+              <h3 className="mt-1 font-sans text-lg font-semibold text-warm-800">
+                {portfolioPlan.name}
+              </h3>
+              <p className="mt-1 text-[14px] text-warm-500">{portfolioPlan.tagline}</p>
+              <p className="mt-2 text-[13px] text-warm-400">
+                From {formatGbp(portfolioPlan.monthlyPriceGbp)}/mo · unlimited properties
+              </p>
+            </div>
+            <a
+              href={planCtaUrl(portfolioPlan, interval)}
+              className="btn-secondary mt-4 shrink-0 sm:mt-0"
+            >
+              {planCtaLabel(portfolioPlan)}
+              <ArrowRight size={16} />
+            </a>
           </div>
-          <a href={portfolioCtaUrl()} className="btn-secondary mt-4 shrink-0 sm:mt-0">
-            {PORTFOLIO_PLAN.cta}
-            <ArrowRight size={16} />
-          </a>
-        </div>
+        ) : null}
 
         <p className="mx-auto mt-10 max-w-xl text-center text-[14px] leading-relaxed text-warm-500">
           Less than two coffees a month to see every renewal, every subscription, and whether your
@@ -187,8 +198,8 @@ export default function PricingSection() {
         <div className="mx-auto mt-8 max-w-2xl rounded-2xl border border-warm-200 bg-white p-6 text-center shadow-sm">
           <p className="text-[14px] leading-relaxed text-warm-500">
             <strong className="text-warm-700">Our pricing principles:</strong> One price per
-            account — no per-vehicle or per-property charges. Annual billing saves ~17%. Clear pricing
-            published before anyone pays. Cancel any time via Stripe.
+            account. Monthly plans cancel anytime. Yearly saves up to {maxSavings}%. Checkout uses
+            one Stripe price for your chosen plan and interval.
           </p>
         </div>
       </Container>
