@@ -17,7 +17,7 @@ export default function PrivacyPage() {
 
             <h2 className="font-sans text-lg font-semibold text-warm-800">1. Who we are</h2>
             <p>
-              H.A.B.I.B.I (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) operates the
+              Habibi (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) operates the
               household operations platform accessible at <strong>ihabibi.uk</strong> and
               related subdomains. This privacy policy explains how we collect, use, and protect
               your personal data when you visit our marketing website or use our platform.
@@ -58,7 +58,7 @@ export default function PrivacyPage() {
 
             <h2 className="font-sans text-lg font-semibold text-warm-800">3. How we use your data</h2>
             <ul className="list-disc space-y-2 pl-5">
-              <li>To provide and operate the H.A.B.I.B.I service</li>
+              <li>To provide and operate the Habibi service</li>
               <li>To send waitlist updates and early access invitations (with your consent)</li>
               <li>To improve and develop the product based on usage patterns</li>
               <li>To communicate service-related announcements</li>

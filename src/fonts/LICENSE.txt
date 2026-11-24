@@ -1,0 +1,8 @@
+Clash Display, Satoshi and Gambetta
+Copyright Indian Type Foundry.
+
+These fonts are free for personal and commercial use under the Fontshare
+licence (https://www.fontshare.com/licence). The woff2 files in this
+directory were downloaded from the Fontshare CDN and are self-hosted so
+the marketing site does not depend on a third-party stylesheet at runtime.
+font-display: swap is set via next/font.

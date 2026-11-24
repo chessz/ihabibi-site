@@ -1,144 +1,87 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
-import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import Logo from '@/components/Logo';
+import { APP_ORIGIN } from '@/lib/pricing-plans';
+
+const LINKS = [
+  { href: '/#features', label: 'Features' },
+  { href: '/#day', label: 'A day' },
+  { href: '/#pricing', label: 'Pricing' },
+  { href: '/#faq', label: 'FAQ' },
+];
 
 export default function Header() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+    if (!open) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open]);
 
   return (
-    <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'border-b border-warm-200 bg-warm-50/90 shadow-sm shadow-black/[0.03] backdrop-blur-lg'
-          : 'border-b border-transparent bg-transparent'
-      }`}
-    >
-      <div className="mx-auto flex max-w-content items-center justify-between px-6 py-2.5 sm:px-8 lg:px-10">
-        {/* Logo */}
-        <Link href="/" className="flex shrink-0 items-center" aria-label="H.A.B.I.B.I — Household OS">
-          <Image
-            src="/logo.png"
-            alt="H.A.B.I.B.I — Household OS"
-            width={220}
-            height={56}
-            className="h-11 w-auto sm:h-12 md:h-[3.25rem]"
-            priority
-          />
+    <header className="site-nav">
+      <div className="wrap nav-row">
+        <Link href="/" className="brand-link" aria-label="Habibi — life admin for the UK" onClick={() => setOpen(false)}>
+          <Logo />
         </Link>
 
-          {/* Desktop nav */}
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
-          <Link href="/" className="btn-ghost">
-            Home
-          </Link>
-          <Link href="/#what-it-tracks" className="btn-ghost">
-            Features
-          </Link>
-          <Link href="/#roi" className="btn-ghost">
-            Savings
-          </Link>
-          <Link href="/#pricing" className="btn-ghost">
-            Pricing
-          </Link>
-          <Link href="/#faq" className="btn-ghost">
-            FAQ
-          </Link>
+        <nav className="nav-links" aria-label="Main">
+          {LINKS.map((link) => (
+            <Link key={link.href} href={link.href}>
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
-        {/* Desktop CTAs */}
-        <div className="hidden items-center gap-2.5 md:flex">
-          <a
-            href="https://app.ihabibi.uk/login"
-            className="btn-ghost"
-          >
+        <div className="nav-right">
+          <a className="btn btn-ghost-dark signin" href={`${APP_ORIGIN}/login`}>
             Sign in
           </a>
-          <a
-            href="https://app.ihabibi.uk/register"
-            className="btn-primary text-[13px] py-2.5 px-5"
-          >
-            Create free account
+          <a className="btn btn-teal" href={`${APP_ORIGIN}/register`}>
+            Start free
           </a>
+          <button
+            type="button"
+            className="nav-toggle"
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            onClick={() => setOpen((value) => !value)}
+          >
+            <span className="sr-only">{open ? 'Close menu' : 'Open menu'}</span>
+            {open ? (
+              <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+                <path d="M4 4l10 10M14 4L4 14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              </svg>
+            ) : (
+              <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+                <path d="M3 5h12M3 9h12M3 13h12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              </svg>
+            )}
+          </button>
         </div>
-
-        {/* Mobile menu toggle */}
-        <button
-          type="button"
-          onClick={() => setOpen(!open)}
-          className="inline-flex items-center justify-center rounded-lg p-2 text-warm-600 hover:bg-warm-100 md:hidden"
-          aria-expanded={open}
-          aria-label={open ? 'Close menu' : 'Open menu'}
-        >
-          {open ? <X size={20} /> : <Menu size={20} />}
-        </button>
       </div>
 
-      {/* Mobile dropdown */}
-      {open && (
-        <div className="border-t border-warm-200 bg-warm-50 px-6 pb-6 pt-4 md:hidden">
-          <nav className="flex flex-col gap-1.5" aria-label="Mobile navigation">
-            <Link
-              href="/"
-              onClick={() => setOpen(false)}
-              className="rounded-lg px-3 py-2.5 text-[15px] font-medium text-warm-700 hover:bg-warm-100"
-            >
-              Home
-            </Link>
-            <Link
-              href="/#what-it-tracks"
-              onClick={() => setOpen(false)}
-              className="rounded-lg px-3 py-2.5 text-[15px] font-medium text-warm-700 hover:bg-warm-100"
-            >
-              Features
-            </Link>
-            <Link
-              href="/#roi"
-              onClick={() => setOpen(false)}
-              className="rounded-lg px-3 py-2.5 text-[15px] font-medium text-warm-700 hover:bg-warm-100"
-            >
-              Savings
-            </Link>
-            <Link
-              href="/#pricing"
-              onClick={() => setOpen(false)}
-              className="rounded-lg px-3 py-2.5 text-[15px] font-medium text-warm-700 hover:bg-warm-100"
-            >
-              Pricing
-            </Link>
-            <Link
-              href="/#faq"
-              onClick={() => setOpen(false)}
-              className="rounded-lg px-3 py-2.5 text-[15px] font-medium text-warm-700 hover:bg-warm-100"
-            >
-              FAQ
-            </Link>
-            <hr className="my-2 border-warm-200" />
-            <a
-              href="https://app.ihabibi.uk/login"
-              className="rounded-lg px-3 py-2.5 text-[15px] font-medium text-warm-700 hover:bg-warm-100"
-            >
-              Sign in
-            </a>
-            <a
-              href="https://app.ihabibi.uk/register"
-              className="btn-primary mt-1 w-full text-center text-[14px] py-2.5"
-            >
-              Create free account
+      {open ? (
+        <div className="wrap nav-drawer" id="mobile-nav">
+          <nav aria-label="Mobile">
+            {LINKS.map((link) => (
+              <Link key={link.href} href={link.href} onClick={() => setOpen(false)}>
+                {link.label}
+              </Link>
+            ))}
+            <a href={`${APP_ORIGIN}/login`}>Sign in</a>
+            <a className="btn btn-teal" href={`${APP_ORIGIN}/register`}>
+              Start free
             </a>
           </nav>
         </div>
-      )}
+      ) : null}
     </header>
   );
 }

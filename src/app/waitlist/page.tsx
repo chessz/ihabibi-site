@@ -19,11 +19,11 @@ export default function WaitlistPage() {
       <Container>
         <div className="mx-auto max-w-2xl text-center">
           <p className="kicker-light mb-4">Early access</p>
-          <h1 className="font-serif text-[2.5rem] leading-[1.15] font-medium tracking-[-0.01em] text-white sm:text-[3rem]">
-            Join the waitlist.
+          <h1 className="font-display text-[2.5rem] leading-[1.05] font-semibold tracking-[-0.03em] text-white sm:text-[3rem]">
+            Join the list.
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-warm-300/80">
-            Get early access to H.A.B.I.B.I. Help shape the household OS before anyone else.
+            Product updates from Habibi. No spam, and no sharing of your address.
           </p>
 
           {submitted ? (
@@ -49,7 +49,7 @@ export default function WaitlistPage() {
                   placeholder="you@example.com"
                   className="flex-1 rounded-lg border border-white/15 bg-slate-800 px-4 py-3 text-[15px] text-white placeholder:text-warm-400 focus:border-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-700/30"
                 />
-                <button type="submit" className="btn-primary whitespace-nowrap">
+                <button type="submit" className="btn btn-teal whitespace-nowrap">
                   Join
                   <ArrowRight size={18} className="ml-2" />
                 </button>
