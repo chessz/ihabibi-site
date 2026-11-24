@@ -46,9 +46,10 @@ module.exports = {
         },
       },
       fontFamily: {
-        serif: ['Fraunces', 'Lora', 'Playfair Display', 'Georgia', 'serif'],
-        sans: ['Inter', 'DM Sans', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'IBM Plex Mono', 'monospace'],
+        display: ['var(--font-clash)', 'Trebuchet MS', 'sans-serif'],
+        serif: ['var(--font-gambetta)', 'Georgia', 'serif'],
+        sans: ['var(--font-satoshi)', 'Avenir Next', 'Segoe UI', 'sans-serif'],
+        mono: ['ui-monospace', 'monospace'],
       },
       spacing: {
         section: '7.5rem',

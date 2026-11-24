@@ -17,13 +17,13 @@ export default function TermsPage() {
 
             <h2 className="font-sans text-lg font-semibold text-warm-800">1. Acceptance of terms</h2>
             <p>
-              By accessing or using H.A.B.I.B.I (&ldquo;the Service&rdquo;), you agree to be bound
+              By accessing or using Habibi (&ldquo;the Service&rdquo;), you agree to be bound
               by these Terms of Service. If you do not agree, do not use the Service.
             </p>
 
             <h2 className="font-sans text-lg font-semibold text-warm-800">2. Description of service</h2>
             <p>
-              H.A.B.I.B.I provides a household operations platform for managing vehicles, property
+              Habibi provides a household operations platform for managing vehicles, property
               information, reminders, and related household data. The Service is currently in early
               access and provided on an &ldquo;as is&rdquo; basis.
             </p>
@@ -64,7 +64,7 @@ export default function TermsPage() {
 
             <h2 className="font-sans text-lg font-semibold text-warm-800">7. Limitation of liability</h2>
             <p>
-              To the maximum extent permitted by law, H.A.B.I.B.I shall not be liable for any
+              To the maximum extent permitted by law, Habibi shall not be liable for any
               indirect, incidental, special, consequential, or punitive damages arising from your
               use of the Service.
             </p>

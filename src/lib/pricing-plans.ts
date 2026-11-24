@@ -123,7 +123,13 @@ export async function fetchPublicPlans(): Promise<PublicPlan[]> {
 
 export function formatGbp(amount: number): string {
   if (amount === 0) return '£0';
-  return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(amount);
+  const wholePounds = Math.round(amount * 100) % 100 === 0;
+  return new Intl.NumberFormat('en-GB', {
+    style: 'currency',
+    currency: 'GBP',
+    minimumFractionDigits: wholePounds ? 0 : 2,
+    maximumFractionDigits: 2,
+  }).format(amount);
 }
 
 export function propertyLimitLabel(limit: number | null): string {
