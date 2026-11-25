@@ -43,14 +43,44 @@ export default function HomeMotion({ children }: { children: ReactNode }) {
     }
 
     if (!settled && rotator && words.length > 1) {
+      // Step by each word's fixed height (0.9em). Percent translate was relative
+      // to the full stack and left the slot blank. Clone word 0 for a seamless loop.
+      const step = 0.9;
+      const holdMs = 2400;
+      const first = words[0].cloneNode(true);
+      rotator.appendChild(first);
+
       let index = 0;
-      rotator.classList.add('is-animating');
-      interval = window.setInterval(() => {
-        index = (index + 1) % words.length;
-        rotator.style.transform = `translateY(${-index * 100}%)`;
-        const label = words[index]?.textContent?.trim();
+      const labelAt = (i: number) =>
+        words[i % words.length]?.textContent?.trim() ?? '';
+
+      // First word is already painted; enable the transition only after paint.
+      rotator.style.transform = 'translateY(0)';
+      if (live) live.textContent = labelAt(0);
+
+      const snapToStart = () => {
+        rotator.classList.remove('is-animating');
+        rotator.style.transform = 'translateY(0)';
+        // Force reflow so the next advance re-enables the transition cleanly.
+        void rotator.offsetHeight;
+        rotator.classList.add('is-animating');
+        index = 0;
+      };
+
+      const advance = () => {
+        index += 1;
+        rotator.classList.add('is-animating');
+        rotator.style.transform = `translateY(${-index * step}em)`;
+        const label = labelAt(index);
         if (live && label) live.textContent = label;
-      }, 2200);
+
+        if (index >= words.length) {
+          timers.push(window.setTimeout(snapToStart, 360));
+        }
+      };
+
+      rotator.classList.add('is-animating');
+      interval = window.setInterval(advance, holdMs);
     }
 
     const seen = new WeakSet<Element>();

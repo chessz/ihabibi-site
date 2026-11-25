@@ -116,7 +116,9 @@ html.js-motion .hero h1 .line:nth-child(4) > span { animation-delay: 0.44s; }
 .rotator {
   display: inline-block;
   position: relative;
-  height: 1em;
+  /* Match h1 line-height so the slot never collapses or leaves a tall empty band */
+  height: 0.9em;
+  min-width: 4ch;
   overflow: hidden;
   vertical-align: bottom;
   color: var(--gold-2);
@@ -128,6 +130,7 @@ html.js-motion .hero h1 .line:nth-child(4) > span { animation-delay: 0.44s; }
   overflow: hidden;
   visibility: hidden;
   white-space: nowrap;
+  pointer-events: none;
 }
 
 .rotator-inner {
@@ -136,17 +139,24 @@ html.js-motion .hero h1 .line:nth-child(4) > span { animation-delay: 0.44s; }
   top: 0;
   display: flex;
   flex-direction: column;
+  will-change: transform;
 }
 
 .rotator-inner span {
   display: block;
-  height: 1em;
-  line-height: 1;
+  height: 0.9em;
+  line-height: 0.9;
   white-space: nowrap;
 }
 
 .rotator-inner.is-animating {
-  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rotator-inner.is-animating {
+    transition: none;
+  }
 }
 
 .hero-after {
